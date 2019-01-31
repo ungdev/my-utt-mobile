@@ -8,11 +8,6 @@ import utt from '../assets/images/logo_UTT.png'
 
 class LoginPage extends React.Component {
 
-  constructor(props) {
-    super(props)
-    this.login = this.login.bind(this)
-  }
-
   componentDidMount () {
     //TODO autologin
   }
