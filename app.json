@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "campus-utt-mobile",
+    "name": "UTT Campus",
     "slug": "campus-utt-mobile",
     "privacy": "public",
     "sdkVersion": "31.0.0",
@@ -23,7 +23,11 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "fr.uttnetgroup.campus"
+    },
+    "android": {
+      "package": "fr.uttnetgroup.campus"
     }
   }
 }
