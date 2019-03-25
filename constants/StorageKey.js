@@ -1,0 +1,5 @@
+export const CLIENT_ID_KEY = '@MyUTT:client-id'
+export const CLIENT_SECRET_KEY = '@MyUTT:client-secret'
+export const ACCESS_TOKEN_KEY = '@MyUTT:access-token'
+export const ACCESS_TOKEN_EXPIRATION_KEY = '@MyUTT:access-token-expiration'
+export const UES_KEY = '@MyUTT:ues'

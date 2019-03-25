@@ -4,21 +4,20 @@ import {
   Text,
   StyleSheet,
   Dimensions,
-  Image,
   PixelRatio
 } from 'react-native'
 import { normalize } from '../../services/font'
 
 const GridButton = props => {
   return (
-    <TouchableOpacity style={styles.container}>
-      {props.image && <Image source={props.image} style={{ width: 70, height: 70 }} ></Image>}
+    <TouchableOpacity style={styles.container} onPress={props.onPress}>
+      {props.image && props.image}
       <Text style={styles.title}>{props.title}</Text>
     </TouchableOpacity>
   )
 }
 let fontSize = 19
-if(PixelRatio.get() <= 2) fontSize = 17
+if (PixelRatio.get() <= 2) fontSize = 17
 const styles = StyleSheet.create({
   container: {
     width: Dimensions.get('window').width / 3 - 6,
@@ -27,7 +26,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     marginHorizontal: 1,
     marginVertical: 1,
-    backgroundColor:'#FFFFFF'
+    backgroundColor: '#FFFFFF'
   },
   title: {
     position: 'absolute',
@@ -36,6 +35,5 @@ const styles = StyleSheet.create({
     textAlign: 'center'
   }
 })
-
 
 export default GridButton

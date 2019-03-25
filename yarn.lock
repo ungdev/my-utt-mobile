@@ -2,6 +2,29 @@
 # yarn lockfile v1
 
 
+"@ant-design/icons-react-native@^1.0.2":
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/@ant-design/icons-react-native/-/icons-react-native-1.0.2.tgz#28648eacb808a1fae0ad59d691bbb472a6ffc26e"
+  integrity sha512-cpTHdeGdxS+kp59rrtHZw6guXJQyDKzvLxGUf2qXeTlua5nKLG1kVoSMtW5tIPep21RcL6gVdwQl5+/mUMk9/w==
+
+"@ant-design/react-native@^3.1.5":
+  version "3.1.5"
+  resolved "https://registry.yarnpkg.com/@ant-design/react-native/-/react-native-3.1.5.tgz#2b19d28b2dfef42be9007833ce0a864243987daf"
+  integrity sha512-CIPjUJ1BB/oOVDIEqL1xJlvNHOzlas8L9As3YHtdQwNyp/GpbK6Y+tfB1tzzPZ+hhQmC8Q6dVLrCOHbq+FduHg==
+  dependencies:
+    "@ant-design/icons-react-native" "^1.0.2"
+    "@bang88/react-native-drawer-layout" "^2.0.3"
+    "@bang88/react-native-ultimate-listview" "^3.3.0"
+    array-tree-filter "~2.1.0"
+    babel-runtime "^6.x"
+    deepmerge "^3.0.0"
+    normalize-css-color "^1.0.2"
+    react-native-collapsible "^1.4.0"
+    react-native-modal-popover "^0.0.12"
+    react-native-safe-area-view "^0.11.0"
+    react-native-swipeout "^2.3.6"
+    utility-types "^2.1.0"
+
 "@babel/code-frame@^7.0.0", "@babel/code-frame@^7.0.0-beta.35":
   version "7.0.0"
   resolved "https://registry.yarnpkg.com/@babel/code-frame/-/code-frame-7.0.0.tgz#06e2ab19bdb535385559aabb5ba59729482800f8"
@@ -628,6 +651,16 @@
     lodash "^4.17.10"
     to-fast-properties "^2.0.0"
 
+"@bang88/react-native-drawer-layout@^2.0.3":
+  version "2.0.3"
+  resolved "https://registry.yarnpkg.com/@bang88/react-native-drawer-layout/-/react-native-drawer-layout-2.0.3.tgz#a93abd5a9c6d1fc4c0924a9f21c2cd7d1deea88d"
+  integrity sha512-rSMgODo8G8bBxLiR4YD9FVLx0U+0/6ABFbfBQ/2PjMNBFjqa6IiAK1uTivMjRgykri1EacDHb81Qd/DkqUrHJw==
+
+"@bang88/react-native-ultimate-listview@^3.3.0":
+  version "3.3.0"
+  resolved "https://registry.yarnpkg.com/@bang88/react-native-ultimate-listview/-/react-native-ultimate-listview-3.3.0.tgz#b09199105b942aee4ae05729e4bd229353217ab6"
+  integrity sha512-qRH8YV1Hi0dJpSQ9VCoWMVFuvxwZ4F5N73fqYMjSh0tGlG/p95WlaM/WVg9PFMphP5Sv5FO0p+vbBKWrbwdE0g==
+
 "@callstack/react-theme-provider@^1.0.7":
   version "1.0.7"
   resolved "https://registry.yarnpkg.com/@callstack/react-theme-provider/-/react-theme-provider-1.0.7.tgz#2d2fd1a1d965f36165eaa2e4da28aed1ade75484"
@@ -686,6 +719,11 @@
   version "4.14.119"
   resolved "https://registry.yarnpkg.com/@types/lodash/-/lodash-4.14.119.tgz#be847e5f4bc3e35e46d041c394ead8b603ad8b39"
   integrity sha512-Z3TNyBL8Vd/M9D9Ms2S3LmFq2sSMzahodD6rCS9V2N44HUMINb75jNkSuwAx7eo2ufqTdfOdtGQpNbieUjPQmw==
+
+"@types/prop-types@^15.5.5":
+  version "15.7.0"
+  resolved "https://registry.yarnpkg.com/@types/prop-types/-/prop-types-15.7.0.tgz#4c48fed958d6dcf9487195a0ef6456d5f6e0163a"
+  integrity sha512-eItQyV43bj4rR3JPV0Skpl1SncRCdziTEK9/v8VwXmV6d/qOUO8/EuWeHBbCZcsfSHfzI5UyMJLCSXtxxznyZg==
 
 "@types/qs@^6.5.1":
   version "6.5.1"
@@ -922,6 +960,11 @@ array-slice@^0.2.3:
   version "0.2.3"
   resolved "https://registry.yarnpkg.com/array-slice/-/array-slice-0.2.3.tgz#dd3cfb80ed7973a75117cdac69b0b99ec86186f5"
   integrity sha1-3Tz7gO15c6dRF82sabC5nshhhvU=
+
+array-tree-filter@~2.1.0:
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/array-tree-filter/-/array-tree-filter-2.1.0.tgz#873ac00fec83749f255ac8dd083814b4f6329190"
+  integrity sha512-4ROwICNlNw/Hqa9v+rk5h22KjmzB1JGTMVKP2AKJBOCgb0yL0ASf0+YvCcLNNwquOHNX48jkeZIJ3a+oOQqKcw==
 
 array-unique@^0.2.1:
   version "0.2.1"
@@ -1483,7 +1526,7 @@ babel-register@^6.26.0:
     mkdirp "^0.5.1"
     source-map-support "^0.4.15"
 
-babel-runtime@^6.22.0, babel-runtime@^6.26.0:
+babel-runtime@^6.22.0, babel-runtime@^6.26.0, babel-runtime@^6.x:
   version "6.26.0"
   resolved "https://registry.yarnpkg.com/babel-runtime/-/babel-runtime-6.26.0.tgz#965c7058668e82b55d7bfe04ff2337bc8b5647fe"
   integrity sha1-llxwWGaOgrVde/4E/yM3vItWR/4=
@@ -2009,7 +2052,7 @@ cosmiconfig@^5.0.5:
     js-yaml "^3.9.0"
     parse-json "^4.0.0"
 
-create-react-class@^15.6.3:
+create-react-class@^15.6.0, create-react-class@^15.6.3:
   version "15.6.3"
   resolved "https://registry.yarnpkg.com/create-react-class/-/create-react-class-15.6.3.tgz#2d73237fb3f970ae6ebe011a9e66f46dbca80036"
   integrity sha512-M+/3Q6E6DLO6Yx3OwrWjwHBnvfXXYA7W+dFjt/ZDBemHO1DDZhsalX/NUtnTYclN6GfnBDRh4qRHjcDHmlJBJg==
@@ -2139,6 +2182,11 @@ deepmerge@^2.1.1:
   version "2.2.1"
   resolved "https://registry.yarnpkg.com/deepmerge/-/deepmerge-2.2.1.tgz#5d3ff22a01c00f645405a2fbc17d0778a1801170"
   integrity sha512-R9hc1Xa/NOBi9WRVUWg19rl1UB7Tt4kuPd+thNJgFZoxXsTz7ncaPaeIm+40oSGuP33DfMb4sZt1QIGiJzC4EA==
+
+deepmerge@^3.0.0:
+  version "3.2.0"
+  resolved "https://registry.yarnpkg.com/deepmerge/-/deepmerge-3.2.0.tgz#58ef463a57c08d376547f8869fdc5bcee957f44e"
+  integrity sha512-6+LuZGU7QCNUnAJyX8cIrlzoEgggTM6B7mm+znKOX4t5ltluT9KLjN6g61ECMS0LTsLW7yDpNoxhix5FZcrIow==
 
 default-require-extensions@^1.0.0:
   version "1.0.0"
@@ -4883,6 +4931,11 @@ mkdirp@^0.5.0, mkdirp@^0.5.1:
   dependencies:
     minimist "0.0.8"
 
+moment@^2.24.0:
+  version "2.24.0"
+  resolved "https://registry.yarnpkg.com/moment/-/moment-2.24.0.tgz#0d055d53f5052aa653c9f6eb68bb5d12bf5c2b5b"
+  integrity sha512-bV7f+6l2QigeBBZSM/6yTNq4P2fNpSWj/0e7jQcy87A8e7o2nAfP/34/2ky5Vw4B9S446EtIhodAzkFCcR4dQg==
+
 morgan@^1.9.0:
   version "1.9.1"
   resolved "https://registry.yarnpkg.com/morgan/-/morgan-1.9.1.tgz#0a8d16734a1d9afbc824b99df87e738e58e2da59"
@@ -5016,6 +5069,11 @@ nopt@^4.0.1:
   dependencies:
     abbrev "1"
     osenv "^0.1.4"
+
+normalize-css-color@^1.0.2:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/normalize-css-color/-/normalize-css-color-1.0.2.tgz#02991e97cccec6623fe573afbbf0de6a1f3e9f8d"
+  integrity sha1-Apkel8zOxmI/5XOvu/Deah8+n40=
 
 normalize-package-data@^2.3.2:
   version "2.4.0"
@@ -5555,6 +5613,13 @@ query-string@^6.1.0:
     decode-uri-component "^0.2.0"
     strict-uri-encode "^2.0.0"
 
+raf@^3.1.0:
+  version "3.4.1"
+  resolved "https://registry.yarnpkg.com/raf/-/raf-3.4.1.tgz#0742e99a4a6552f445d73e3ee0328af0ff1ede39"
+  integrity sha512-Sq4CW4QhwOHE8ucn6J34MqtZCeWFP2aQSmrlroYgqAV1PjStIhJXxYuTgUIfkEk7zTLjmIjLmU5q+fbD1NnOJA==
+  dependencies:
+    performance-now "^2.1.0"
+
 randomatic@^3.0.0:
   version "3.1.1"
   resolved "https://registry.yarnpkg.com/randomatic/-/randomatic-3.1.1.tgz#b776efc59375984e36c537b2f51a1f0aff0da1ed"
@@ -5617,6 +5682,18 @@ react-native-branch@2.2.5:
   resolved "https://registry.yarnpkg.com/react-native-branch/-/react-native-branch-2.2.5.tgz#4074dd63b4973e6397d9ce50e97b57c77a518e9d"
   integrity sha1-QHTdY7SXPmOX2c5Q6XtXx3pRjp0=
 
+react-native-collapsible@^1.4.0:
+  version "1.4.0"
+  resolved "https://registry.yarnpkg.com/react-native-collapsible/-/react-native-collapsible-1.4.0.tgz#ec03cac361178319b77bb9993b73677356dd89d2"
+  integrity sha512-lf2U3gRHTNakqtN04NLJkmF02XaOF/DPOTGlwK8yrn85wMAdRaPpD0fnb7RvH4OID3SmxXBTWzZqkBTmasJyIQ==
+  dependencies:
+    prop-types "^15.6.2"
+
+react-native-device-info@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/react-native-device-info/-/react-native-device-info-1.0.1.tgz#4bca46388773ade9a8599dfe0c55d87756b0622b"
+  integrity sha512-TjDO4lPtMmM7Cuj1SanmCPw3RBhXvnUcOHTvX+2QeI2BjrCGjxmc3xFSmBkKn/oy2G67qWdDDgpE4HTSw9ZhUA==
+
 react-native-dismiss-keyboard@1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/react-native-dismiss-keyboard/-/react-native-dismiss-keyboard-1.0.0.tgz#32886242b3f2317e121f3aeb9b0a585e2b879b49"
@@ -5649,6 +5726,15 @@ react-native-maps@expo/react-native-maps#v0.22.1-exp.0:
   version "0.22.1"
   resolved "https://codeload.github.com/expo/react-native-maps/tar.gz/e6f98ff7272e5d0a7fe974a41f28593af2d77bb2"
 
+react-native-modal-popover@^0.0.12:
+  version "0.0.12"
+  resolved "https://registry.yarnpkg.com/react-native-modal-popover/-/react-native-modal-popover-0.0.12.tgz#5c0b5e9e0323490c3c5867821fc94b6582bfa3dc"
+  integrity sha512-uZQsTDcGOI8y/05L/Lb0OMBesJYYRWEc0pj2038a579LnDnJJpKay0kD654cQpA4Ozt3xbu4DMTGwenynBSEFg==
+  dependencies:
+    "@types/prop-types" "^15.5.5"
+    lodash.debounce "^4.0.8"
+    prop-types "^15.6.2"
+
 react-native-paper@^2.7.0:
   version "2.7.0"
   resolved "https://registry.yarnpkg.com/react-native-paper/-/react-native-paper-2.7.0.tgz#36f7228548884d4c1cde8bd7b1d44b6621a9107d"
@@ -5670,7 +5756,7 @@ react-native-reanimated@1.0.0-alpha.10:
   resolved "https://registry.yarnpkg.com/react-native-reanimated/-/react-native-reanimated-1.0.0-alpha.10.tgz#e9e6fb35a2cf52fdc912b9fbc76f34f80698e530"
   integrity sha512-dbZG/Lh5Q+6zRvS7+gIkZKmXTG7XVqHbpMROL1LApBBMQwuLq/uLtKk/nBSn1+mNmazPrPMTehI7TG3AEkctww==
 
-react-native-safe-area-view@0.11.0:
+react-native-safe-area-view@0.11.0, react-native-safe-area-view@^0.11.0:
   version "0.11.0"
   resolved "https://registry.yarnpkg.com/react-native-safe-area-view/-/react-native-safe-area-view-0.11.0.tgz#4f3dda43c2bace37965e7c6aef5fc83d4f19d174"
   integrity sha512-N3nElaahu1Me2ltnfc9acpgt1znm6pi8DSadKy79kvdzKwvVIzw0IXueA/Hjr51eCW1BsfNw7D1SgBT9U6qEkA==
@@ -5703,6 +5789,15 @@ react-native-svg@8.0.8:
     lodash "^4.16.6"
     pegjs "^0.10.0"
 
+react-native-swipeout@^2.3.6:
+  version "2.3.6"
+  resolved "https://registry.yarnpkg.com/react-native-swipeout/-/react-native-swipeout-2.3.6.tgz#47dac8a835825cf3f2eef9e495574a3d9ab6d3fa"
+  integrity sha512-t9suUCspzck4vp2pWggWe0frS/QOtX6yYCawHnEes75A7dZCEE74bxX2A1bQzGH9cUMjq6xsdfC94RbiDKIkJg==
+  dependencies:
+    create-react-class "^15.6.0"
+    prop-types "^15.5.10"
+    react-tween-state "^0.1.5"
+
 react-native-tab-view@^0.0.77:
   version "0.0.77"
   resolved "https://registry.yarnpkg.com/react-native-tab-view/-/react-native-tab-view-0.0.77.tgz#11ceb8e7c23100d07e628dc151b57797524d00d4"
@@ -5730,6 +5825,15 @@ react-native-vector-icons@6.0.0:
   version "6.0.0"
   resolved "https://registry.yarnpkg.com/react-native-vector-icons/-/react-native-vector-icons-6.0.0.tgz#3a7076dbe244ea94c6d5e92802a870e64a4283c5"
   integrity sha512-uF3oWb3TV42uXi2apVOZHw9oy9Nr5SXDVwOo1umQWo/yYCrDzXyVfq14DzezgEbJ9jfc/yghBelj0agkXmOKlg==
+  dependencies:
+    lodash "^4.0.0"
+    prop-types "^15.6.2"
+    yargs "^8.0.2"
+
+react-native-vector-icons@^6.2.0:
+  version "6.2.0"
+  resolved "https://registry.yarnpkg.com/react-native-vector-icons/-/react-native-vector-icons-6.2.0.tgz#2682b718099eb9470c0defd38da47deb844a0f9c"
+  integrity sha512-NEQeQF7RzO5OILV4Q/F8P3pSuwN45/PPbOwU8/Eocc2Kl1bH1D42WFj+WSbCLVKeEq6oo7uj3tGqmrXGLs974A==
   dependencies:
     lodash "^4.0.0"
     prop-types "^15.6.2"
@@ -5874,6 +5978,14 @@ react-transform-hmr@^1.0.4:
   dependencies:
     global "^4.3.0"
     react-proxy "^1.1.7"
+
+react-tween-state@^0.1.5:
+  version "0.1.5"
+  resolved "https://registry.yarnpkg.com/react-tween-state/-/react-tween-state-0.1.5.tgz#e98b066551efb93cb92dd1be14995c2e3deae339"
+  integrity sha1-6YsGZVHvuTy5LdG+FJlcLj3q4zk=
+  dependencies:
+    raf "^3.1.0"
+    tween-functions "^1.0.1"
 
 react@16.5.0:
   version "16.5.0"
@@ -6779,6 +6891,11 @@ tunnel-agent@^0.6.0:
   dependencies:
     safe-buffer "^5.0.1"
 
+tween-functions@^1.0.1:
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/tween-functions/-/tween-functions-1.2.0.tgz#1ae3a50e7c60bb3def774eac707acbca73bbc3ff"
+  integrity sha1-GuOlDnxguz3vd06scHrLynO7w/8=
+
 tweetnacl@^0.14.3, tweetnacl@~0.14.0:
   version "0.14.5"
   resolved "https://registry.yarnpkg.com/tweetnacl/-/tweetnacl-0.14.5.tgz#5ae68177f192d4456269d108afa93ff8743f4f64"
@@ -6922,6 +7039,11 @@ util.promisify@^1.0.0:
   dependencies:
     define-properties "^1.1.2"
     object.getownpropertydescriptors "^2.0.3"
+
+utility-types@^2.1.0:
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/utility-types/-/utility-types-2.1.0.tgz#0c78fc9f7eb424d14302222b4ddd13fdb17f44ab"
+  integrity sha512-/nP2gqavggo6l38rtQI/CdeV+2fmBGXVvHgj9kV2MAnms3TIi77Mz9BtapPFI0+GZQCqqom0vACQ+VlTTaCovw==
 
 utils-merge@1.0.1:
   version "1.0.1"

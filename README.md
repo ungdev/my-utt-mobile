@@ -30,3 +30,17 @@
 * app.json => app infos, like version (it's important to increase it when you publish a new version)
 * config.js(.example) => configuration file for globale static variables
 * README.md => this file
+
+
+## Create a bundle
+
+* Create the folder Bundles/NameOfYourBundleBundle
+* Create the bundle entry point, usually "Main.js" in that folder
+* Do whatever you want in that folder, add tabs, functionnalities...
+* Dont forget to implement a return button on the top left corner to return to main menu
+* Go to navigation/AppNavigator.js => add your Bundle in the list
+* Go to navigation/MainMenu.js => add a button to your app with destination equal to the Bundle name in AppNavigator
+
+## Icons
+
+* you can see all icons usable here : https://oblador.github.io/react-native-vector-icons/
