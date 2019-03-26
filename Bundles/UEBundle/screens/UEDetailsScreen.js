@@ -15,9 +15,9 @@ class UEDetailsScreen extends React.Component {
   }
   static navigationOptions = ({ navigation }) => {
     return {
-      title: navigation.getParam('code', '...'),
-    };
-  };
+      title: navigation.getParam('code', '...')
+    }
+  }
 
   getDetails = async slug => {
     try {

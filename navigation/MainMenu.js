@@ -9,8 +9,10 @@ import {
   ACCESS_TOKEN_KEY,
   ACCESS_TOKEN_EXPIRATION_KEY,
   CLIENT_ID_KEY,
-  CLIENT_SECRET_KEY
+  CLIENT_SECRET_KEY,
+  USER_KEY
 } from '../constants/StorageKey'
+import { fetchUser } from '../services/api';
 
 class MainMenu extends React.Component {
   constructor(props) {
@@ -26,6 +28,8 @@ class MainMenu extends React.Component {
       if (expiration_date) {
         if (moment().isAfter(expiration_date * 1000)) {
           this.props.navigation.navigate('Login')
+        } else {
+          this.getUserInformations()
         }
       }
     } catch (e) {
@@ -50,6 +54,15 @@ class MainMenu extends React.Component {
         break
       default:
         break
+    }
+  }
+
+  getUserInformations = async () => {
+    try {
+      const user = await fetchUser()
+      await AsyncStorage.setItem(USER_KEY, JSON.stringify(user))
+    } catch (e) {
+      console.log(e)
     }
   }
 

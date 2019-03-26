@@ -5,7 +5,9 @@ import {
   StyleSheet,
   Image,
   Text,
-  AsyncStorage
+  AsyncStorage,
+  TouchableOpacity,
+  ActivityIndicator
 } from 'react-native'
 import Icon from 'react-native-vector-icons/FontAwesome'
 import { List, InputItem } from '@ant-design/react-native'
@@ -29,8 +31,23 @@ class SearchUEScreen extends React.Component {
       search: ''
     }
   }
-  static navigationOptions = {
-    title: 'Rechercher une UE'
+  static navigationOptions = ({ navigation }) => {
+    return {
+      title: 'Rechercher une UE',
+      headerStyle: {
+        backgroundColor: '#4098ff'
+      },
+      headerLeft: (
+        <TouchableOpacity onPress={() => navigation.navigate('Main')}>
+          <Icon
+            name='angle-left'
+            size={32}
+            style={{ marginLeft: 10 }}
+            color='#fff'
+          />
+        </TouchableOpacity>
+      )
+    }
   }
 
   getUEsFromMemory = async () => {
@@ -53,7 +70,12 @@ class SearchUEScreen extends React.Component {
   render() {
     let { ues } = this.state
     const { navigate } = this.props.navigation
-    if (ues.length === 0) return <Icon name='briefcase' size={26} />
+    if (ues.length === 0)
+      return (
+        <View style={styles.spin}>
+          <ActivityIndicator size='large' color='#4098ff' />
+        </View>
+      )
     ues = ues.filter(ue => {
       const fullname = `${ue.slug} ${ue.name}`
       return (
@@ -100,8 +122,6 @@ class SearchUEScreen extends React.Component {
                   image = ct
                   break
                 default:
-                  console.log(ue.category)
-
                   break
               }
               return (
@@ -132,6 +152,11 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingTop: 15,
     backgroundColor: '#fff'
+  },
+  spin: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center'
   },
   item: {
     marginRight: 20

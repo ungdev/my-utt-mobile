@@ -5,13 +5,14 @@ import {
 } from 'react-navigation'
 
 import TabBarIcon from '../../components/TabBarIcon'
-import HomeScreen from './screens/HomeScreen'
+import MyUEScreen from './screens/MyUEScreen'
 import SearchUEScreen from './screens/SearchUEScreen'
 import UEDetailsScreen from './screens/UEDetailsScreen'
 import SettingsScreen from './screens/SettingsScreen'
 
-const HomeStack = createStackNavigator({
-  Home: HomeScreen
+const MyUEsStack = createStackNavigator({
+  MyUEs: MyUEScreen,
+  Details: UEDetailsScreen
 })
 const SearchStack = createStackNavigator({
   Search: SearchUEScreen,
@@ -21,7 +22,7 @@ const SettingsStack = createStackNavigator({
   Settings: SettingsScreen
 })
 
-HomeStack.navigationOptions = {
+MyUEsStack.navigationOptions = {
   tabBarLabel: 'Mes UEs',
   tabBarIcon: ({ focused }) => (
     <TabBarIcon focused={focused} name='briefcase' />
@@ -43,7 +44,7 @@ SettingsStack.navigationOptions = {
 }
 
 export default createBottomTabNavigator({
-  HomeStack,
+  MyUEsStack,
   SearchStack,
   SettingsStack
 })

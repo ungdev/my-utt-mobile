@@ -8,18 +8,18 @@ import { ACCESS_TOKEN_EXPIRATION_KEY } from '../../constants/StorageKey'
 
 class LoginPage extends React.Component {
   componentDidMount() {
-    console.log('AUTOLOGIN ?')
     this.autoLogin()
   }
 
   autoLogin = async () => {
     try {
-      console.log('try')
+      console.log('Try Autologin')
       const expiration_date = await AsyncStorage.getItem(
         ACCESS_TOKEN_EXPIRATION_KEY
       )
       if (expiration_date !== null) {
         if (moment().isBefore(expiration_date * 1000)) {
+          console.log('AUTOLOGIN SUCCESSFUL')
           this.props.navigation.navigate('Main')
         }
       }

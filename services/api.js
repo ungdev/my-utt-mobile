@@ -14,7 +14,13 @@ const getToken = async () => { // TODO Check token expiration, and if it expired
 }
 
 
-
+export const fetchUser = async () => {
+  const token = await getToken()
+  const res = await api.get('private/user/account', {
+    headers: { Authorization: `Bearer ${token}` }
+  })
+  return res.data.data
+}
 
 export const fetchUEs = async () => {
   const token = await getToken()
