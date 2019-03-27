@@ -63,6 +63,7 @@ class MainMenu extends React.Component {
       await AsyncStorage.setItem(USER_KEY, JSON.stringify(user))
     } catch (e) {
       console.log(e)
+      this.props.navigation.navigate('Login')
     }
   }
 

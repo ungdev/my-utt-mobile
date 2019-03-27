@@ -36,6 +36,9 @@ class MyUEScreen extends React.Component {
       headerStyle: {
         backgroundColor: '#4098ff'
       },
+      headerTitleStyle: {
+        color: 'white'
+      },
       headerLeft: (
         <TouchableOpacity onPress={() => navigation.navigate('Main')}>
           <Icon
@@ -66,6 +69,7 @@ class MyUEScreen extends React.Component {
       await AsyncStorage.setItem(UES_KEY, JSON.stringify(ues))
     } catch (e) {
       console.log(e)
+      this.props.navigation.navigate('Login')
     }
   }
   render() {
@@ -128,7 +132,10 @@ class MyUEScreen extends React.Component {
                   ue.nodetails
                     ? null
                     : () => {
-                        navigate('Details', { slug: ue.slug, code: ue.code })
+                        navigate('Details', {
+                          slug: ue.slug,
+                          code: ue.code
+                        })
                       }
                 }
               >

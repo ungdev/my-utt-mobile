@@ -8,10 +8,12 @@ import TabBarIcon from '../../components/TabBarIcon'
 import MyUEScreen from './screens/MyUEScreen'
 import SearchUEScreen from './screens/SearchUEScreen'
 import UEDetailsScreen from './screens/UEDetailsScreen'
+import UECommentaireScreen from './screens/UECommentaireScreen'
 
 const MyUEsStack = createStackNavigator({
   MyUEs: MyUEScreen,
-  Details: UEDetailsScreen
+  Details: UEDetailsScreen,
+  Commentaires: UECommentaireScreen,
 })
 const SearchStack = createStackNavigator({
   Search: SearchUEScreen,
