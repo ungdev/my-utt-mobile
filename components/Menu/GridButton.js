@@ -1,11 +1,5 @@
 import React from 'react'
-import {
-  TouchableOpacity,
-  Text,
-  StyleSheet,
-  Dimensions,
-  PixelRatio
-} from 'react-native'
+import { TouchableOpacity, Text, StyleSheet, Dimensions } from 'react-native'
 import { normalize } from '../../services/font'
 
 const GridButton = props => {
@@ -16,8 +10,6 @@ const GridButton = props => {
     </TouchableOpacity>
   )
 }
-let fontSize = 19
-if (PixelRatio.get() <= 2) fontSize = 17
 const styles = StyleSheet.create({
   container: {
     width: Dimensions.get('window').width / 3 - 6,

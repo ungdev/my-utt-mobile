@@ -66,6 +66,7 @@ class UEDetailsScreen extends React.Component {
           <ActivityIndicator size='large' color='#4098ff' />
         </View>
       )
+    // TODO redirect to user profil on click on name
     return (
       <View style={styles.container}>
         <ScrollView>
@@ -73,7 +74,7 @@ class UEDetailsScreen extends React.Component {
             const date = moment(comment.createdAt.date).format('DD/MM/YYYY')
             return (
             <Card key={index} style={styles.card}>
-              <Card.Header title={`De : ${comment.fullName}`} extra={`Le ${date}`} /> {/** TODO redirect to user profil on click */}
+              <Card.Header title={`De : ${comment.fullName}`} extra={`Le ${date}`} /> 
               <Card.Body style={styles.body}>
                 <HTML html={comment.body} />
               </Card.Body>

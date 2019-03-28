@@ -2,14 +2,11 @@ import React from 'react'
 import { Text, StyleSheet, View } from 'react-native'
 import { normalize } from '../services/font'
 
-const GridButton = props => {
-  console.log(props)
-  return (
-    <View style={styles.container}>
-      <Text style={styles.text}>{props.children}</Text>
-    </View>
-  )
-}
+const GridButton = props => (
+  <View style={styles.container}>
+    <Text style={styles.text}>{props.children}</Text>
+  </View>
+)
 const styles = StyleSheet.create({
   container: {
     height: 30,

@@ -51,7 +51,6 @@ class UEDetailsScreen extends React.Component {
   getDetails = async slug => {
     try {
       const ue = await fetchUEDetails(slug)
-      console.log(ue)
       this.setState({ ue })
     } catch (e) {
       console.log(e)
@@ -68,7 +67,6 @@ class UEDetailsScreen extends React.Component {
           <ActivityIndicator size='large' color='#4098ff' />
         </View>
       )
-    console.log(this.state.ue)
     return (
       <View style={styles.container}>
         <ScrollView style={styles.subcontainer}>
@@ -117,7 +115,7 @@ class UEDetailsScreen extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#eeeeee',
+    backgroundColor: '#fff',
     justifyContent: 'center',
     alignItems: 'center'
   },
@@ -125,7 +123,7 @@ const styles = StyleSheet.create({
     flex: 1,
     marginTop: 15,
     padding: 10,
-    backgroundColor: '#ffffff',
+    backgroundColor: '#fff',
     width: Dimensions.get('window').width * 0.9,
     height: Dimensions.get('window').width * 0.9
   },
