@@ -1,16 +1,15 @@
-# Campus UTT
+# My UTT
 
 ## Requirement :
 
 * React Native with expo
-* Campus UTT API up and running : https://github.com/ungdev/campus-utt-mobile-api
 
 ## Installation :
 
 1. clone repository
-* git clone https://github.com/ungdev/campus-utt-mobile.git
+* git clone https://github.com/ungdev/my-utt-mobile.git
+* cd my-utt-mobile
 2. copy config file and edit it
-* cd campus-utt-mobile
 * cp config.js.example config.js
 * nano config.js
 3. install dependencies :
@@ -20,15 +19,16 @@
 
 ## File Architecture :
 
-* /assets/* => all font, images, files used in the app
+* /assets/* => all font, images, files used in the app globally
 * /components/* => all react components that can be reused multiple times
 * /constants/* => to be replaced by /theme/*, store theme information like colors etc
 * /navigation/* => handle app navigation, where the user should be redirected, not the actual content
+* /Bundles/* => all the app's bundles, for example, UEBundle handle everything about UEs. One folder = One bundle (see 'Create a bundle')
 * /node_modules/* => dependencies, dont touch it
-* /screens/* => pages, content, etc
+* /screens/* => pages, content, etc (other than bundles')
 * App.js => entry point of the app
 * app.json => app infos, like version (it's important to increase it when you publish a new version)
-* config.js(.example) => configuration file for globale static variables
+* config.js(.example) => configuration file for globale static variables (like etuutt's link)
 * README.md => this file
 
 

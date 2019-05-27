@@ -72,9 +72,9 @@ class MainMenu extends React.Component {
     let gridContent = [
       [
         {
-          name: 'Trombinoscope',
-          image: <Icon name='address-book' size={70} color='#333' />,
-          destination: 'trombi'
+          name: 'Mon profile',
+          image: <Icon name='user' size={70} color='#333' />,
+          destination: 'profile'
         },
         {
           name: 'Guide des UEs',
@@ -102,7 +102,9 @@ class MainMenu extends React.Component {
       ],
       [
         {
-          name: ''
+          name: 'Trombinoscopes',
+          image: <Icon name='address-book' size={70} color='#333' />,
+          destination: 'trombi'
         },
         {
           name: ''

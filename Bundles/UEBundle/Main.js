@@ -13,11 +13,12 @@ import UECommentaireScreen from './screens/UECommentaireScreen'
 const MyUEsStack = createStackNavigator({
   MyUEs: MyUEScreen,
   Details: UEDetailsScreen,
-  Commentaires: UECommentaireScreen,
+  Commentaires: UECommentaireScreen
 })
 const SearchStack = createStackNavigator({
   Search: SearchUEScreen,
-  Details: UEDetailsScreen
+  Details: UEDetailsScreen,
+  Commentaires: UECommentaireScreen
 })
 
 MyUEsStack.navigationOptions = {
