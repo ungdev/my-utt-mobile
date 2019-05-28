@@ -12,12 +12,14 @@ import {
   CLIENT_SECRET_KEY,
   USER_KEY
 } from '../constants/StorageKey'
-import { fetchUser } from '../services/api';
+import { fetchUser } from '../services/api'
+import { registerForExpoPushNotifications } from '../services/expoPushNotifications'
 
 class MainMenu extends React.Component {
   constructor(props) {
     super(props)
     this.checkToken()
+    registerForExpoPushNotifications()
   }
 
   checkToken = async () => {

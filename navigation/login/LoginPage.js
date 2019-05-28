@@ -13,7 +13,7 @@ class LoginPage extends React.Component {
 
   autoLogin = async () => {
     try {
-      console.log('Try Autologin')
+      console.log('Try Autologin with old credentials if exist')
       const expiration_date = await AsyncStorage.getItem(
         ACCESS_TOKEN_EXPIRATION_KEY
       )
