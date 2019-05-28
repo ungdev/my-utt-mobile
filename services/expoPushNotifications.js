@@ -1,5 +1,12 @@
 import { Permissions, Notifications } from 'expo'
 import { setExpoPushToken } from './api'
+import { Alert } from 'react-native'
+
+const _handleNotification = notification => {
+  if (notification.remote) {
+    Alert.alert(notification.data.title, notification.data.message)
+  }
+}
 
 export async function registerForExpoPushNotifications() {
   const { status: existingStatus } = await Permissions.getAsync(
@@ -17,7 +24,7 @@ export async function registerForExpoPushNotifications() {
   }
 
   // Stop here if the user did not grant permissions
-  console.log('FINAL STATUS', finalStatus)
+  console.log('NOTIFICATION STATUS :', finalStatus)
   if (finalStatus !== 'granted') {
     return
   }
@@ -27,5 +34,6 @@ export async function registerForExpoPushNotifications() {
   console.log('TOKEN', token)
   token = token.split('[')[1].split(']')[0]
   // POST the token to your backend server from where you can retrieve it to send push notifications.
+  Notifications.addListener(_handleNotification)
   return setExpoPushToken(token)
 }
