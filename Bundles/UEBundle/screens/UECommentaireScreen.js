@@ -34,12 +34,6 @@ class UEDetailsScreen extends React.Component {
       },
       headerLeft: Platform.OS === 'ios' && (
         <TouchableOpacity style={styles.back} onPress={() => navigation.pop()}>
-          <Icon
-            name='angle-left'
-            size={32}
-            style={{ marginLeft: 10 }}
-            color='#fff'
-          />
           <Text style={{ marginLeft: 8, color: 'white', fontSize: 20 }}>
             Retour
           </Text>

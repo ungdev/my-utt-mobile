@@ -1,24 +1,9 @@
 import React from 'react'
-import {
-  View,
-  TouchableOpacity,
-  StyleSheet,
-  Image,
-  Text,
-  AsyncStorage,
-  ActivityIndicator
-} from 'react-native'
-import Icon from 'react-native-vector-icons/FontAwesome'
-import { List } from '@ant-design/react-native'
-import cs from '../assets/imgs/cs.png'
-import tm from '../assets/imgs/tm.png'
-import ec from '../assets/imgs/ec.png'
-import me from '../assets/imgs/me.png'
-import st from '../assets/imgs/st.png'
-import ct from '../assets/imgs/ct.png'
-import other from '../assets/imgs/other.png'
+import { View, StyleSheet, AsyncStorage, ActivityIndicator } from 'react-native'
 import { fetchUEs } from '../../../services/api'
-import { UES_KEY, USER_KEY } from '../../../constants/StorageKey'
+import { UES_KEY } from '../../../constants/StorageKey'
+import DefaultTopbar from '../../../constants/DefaultTopbar'
+import UEList from '../components/UEList'
 
 class MyUEScreen extends React.Component {
   constructor(props) {
@@ -29,27 +14,8 @@ class MyUEScreen extends React.Component {
       ues: []
     }
   }
-  static navigationOptions = ({ navigation }) => {
-    return {
-      title: 'Mes UE',
-      headerStyle: {
-        backgroundColor: '#4098ff'
-      },
-      headerTitleStyle: {
-        color: 'white'
-      },
-      headerLeft: (
-        <TouchableOpacity onPress={() => navigation.navigate('Main')}>
-          <Icon
-            name='angle-left'
-            size={32}
-            style={{ marginLeft: 10 }}
-            color='#fff'
-          />
-        </TouchableOpacity>
-      )
-    }
-  }
+  static navigationOptions = ({ navigation }) =>
+    DefaultTopbar(navigation, 'Mes UEs')
 
   getUEsFromMemory = async () => {
     try {
@@ -80,7 +46,7 @@ class MyUEScreen extends React.Component {
         </View>
       )
 
-    const myue = user.uvs.map(uv => {
+    const myues = user.uvs.map(uv => {
       const found = ues.find(u => u.code === uv)
       return found
         ? found
@@ -94,57 +60,10 @@ class MyUEScreen extends React.Component {
     })
     return (
       <View style={styles.container}>
-        <List>
-          {myue.map((ue, index) => {
-            let image = other
-            switch (ue.category) {
-              case 'cs':
-                image = cs
-                break
-              case 'tm':
-                image = tm
-                break
-              case 'ec':
-                image = ec
-                break
-              case 'me':
-                image = me
-                break
-              case 'st':
-                image = st
-                break
-              case 'ct':
-                image = ct
-                break
-              case 'other':
-                image = other
-                break
-              default:
-                console.log('category not found : ', ue.category)
-                break
-            }
-            return (
-              <List.Item
-                key={index}
-                thumb={<Image source={image} style={styles.item} />}
-                arrow={ue.nodetails ? null : 'horizontal'}
-                onPress={
-                  ue.nodetails
-                    ? null
-                    : () => {
-                        navigate('Details', {
-                          slug: ue.slug,
-                          code: ue.code
-                        })
-                      }
-                }
-              >
-                <Text>{ue.code}</Text>
-                <Text>{ue.name}</Text>
-              </List.Item>
-            )
-          })}
-        </List>
+        <UEList
+          ues={myues}
+          onPress={ue => navigate('Details', { slug: ue.slug, code: ue.code })}
+        />
       </View>
     )
   }

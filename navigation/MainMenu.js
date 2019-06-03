@@ -43,6 +43,9 @@ class MainMenu extends React.Component {
       case 'ue':
         this.props.navigation.navigate('UE')
         break
+      case 'profile':
+        this.props.navigation.navigate('Profile')
+        break
       case 'logout':
         try {
           await AsyncStorage.setItem(ACCESS_TOKEN_EXPIRATION_KEY, '')

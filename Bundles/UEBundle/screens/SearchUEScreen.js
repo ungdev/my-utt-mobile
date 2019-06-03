@@ -3,16 +3,14 @@ import {
   View,
   ScrollView,
   StyleSheet,
-  Image,
-  Text,
   AsyncStorage,
-  TouchableOpacity,
   ActivityIndicator
 } from 'react-native'
 import Icon from 'react-native-vector-icons/FontAwesome'
 import { InputItem } from '@ant-design/react-native'
 import { fetchUEs } from '../../../services/api'
 import { UES_KEY } from '../../../constants/StorageKey'
+import DefaultTopbar from '../../../constants/DefaultTopbar'
 import UEList from '../components/UEList'
 
 class SearchUEScreen extends React.Component {
@@ -25,27 +23,8 @@ class SearchUEScreen extends React.Component {
       search: ''
     }
   }
-  static navigationOptions = ({ navigation }) => {
-    return {
-      title: 'Rechercher une UE',
-      headerStyle: {
-        backgroundColor: '#4098ff'
-      },
-      headerTitleStyle: {
-        color: 'white'
-      },
-      headerLeft: (
-        <TouchableOpacity onPress={() => navigation.navigate('Main')}>
-          <Icon
-            name='angle-left'
-            size={32}
-            style={{ marginLeft: 10 }}
-            color='#fff'
-          />
-        </TouchableOpacity>
-      )
-    }
-  }
+  static navigationOptions = ({ navigation }) =>
+    DefaultTopbar(navigation, 'Rechercher une UE')
 
   getUEsFromMemory = async () => {
     try {
