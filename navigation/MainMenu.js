@@ -63,6 +63,7 @@ class MainMenu extends React.Component {
     try {
       const user = await fetchUser()
       await AsyncStorage.setItem(USER_KEY, JSON.stringify(user))
+      this.props.screenProps.setUser(user)
     } catch (e) {
       console.log(e)
       this.props.navigation.navigate('Login')

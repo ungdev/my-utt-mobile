@@ -25,7 +25,7 @@ class UEDetailsScreen extends React.Component {
   }
   static navigationOptions = ({ navigation }) => {
     return {
-      title : `${navigation.getParam('code', '...')}`,
+      title: `${navigation.getParam('code', '...')}`,
       headerStyle: {
         backgroundColor: '#4098ff'
       },
@@ -60,7 +60,8 @@ class UEDetailsScreen extends React.Component {
 
   render() {
     const { ue } = this.state
-    const { navigation } = this.props
+    const { navigation, screenProps } = this.props
+    const { user } = screenProps
     if (!ue)
       return (
         <View style={styles.spin}>
@@ -95,16 +96,18 @@ class UEDetailsScreen extends React.Component {
           {ue.the > 0 && (
             <Text style={styles.attributes}>Travail personnel : {ue.the}</Text>
           )}
-          <Button
-            onPress={() =>
-              navigation.navigate('Commentaires', {
-                slug: navigation.getParam('slug', '...'),
-                code: navigation.getParam('code', '...')
-              })
-            }
-          >
-            Voir les commentaires
-          </Button>
+          {user && user.isStudent && (
+            <Button
+              onPress={() =>
+                navigation.navigate('Commentaires', {
+                  slug: navigation.getParam('slug', '...'),
+                  code: navigation.getParam('code', '...')
+                })
+              }
+            >
+              Voir les commentaires
+            </Button>
+          )}
           <Text style={{ marginBottom: 40 }} />
         </ScrollView>
       </View>

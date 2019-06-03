@@ -1,7 +1,7 @@
 import React from 'react'
 import {
   View,
-  FlatList,
+  ScrollView,
   StyleSheet,
   Image,
   Text,
@@ -10,16 +10,10 @@ import {
   ActivityIndicator
 } from 'react-native'
 import Icon from 'react-native-vector-icons/FontAwesome'
-import { List, InputItem } from '@ant-design/react-native'
-import cs from '../assets/imgs/cs.png'
-import tm from '../assets/imgs/tm.png'
-import ec from '../assets/imgs/ec.png'
-import me from '../assets/imgs/me.png'
-import st from '../assets/imgs/st.png'
-import ct from '../assets/imgs/ct.png'
-import other from '../assets/imgs/other.png'
+import { InputItem } from '@ant-design/react-native'
 import { fetchUEs } from '../../../services/api'
 import { UES_KEY } from '../../../constants/StorageKey'
+import UEList from '../components/UEList'
 
 class SearchUEScreen extends React.Component {
   constructor(props) {
@@ -100,52 +94,14 @@ class SearchUEScreen extends React.Component {
         >
           <Icon name='search' size={26} />
         </InputItem>
-        <View style={styles.list}>
-          <FlatList
-            data={ues}
-            renderItem={item => {
-              const ue = item.item
-              let image = other
-              switch (ue.category) {
-                case 'cs':
-                  image = cs
-                  break
-                case 'tm':
-                  image = tm
-                  break
-                case 'ec':
-                  image = ec
-                  break
-                case 'me':
-                  image = me
-                  break
-                case 'st':
-                  image = st
-                  break
-                case 'ct':
-                  image = ct
-                  break
-                default:
-                  break
-              }
-              return (
-                <List key={item.index}>
-                  <List.Item
-                    key={item.index}
-                    thumb={<Image source={image} style={styles.item} />}
-                    arrow='horizontal'
-                    onPress={() =>
-                      navigate('Details', { slug: ue.slug, code: ue.code })
-                    }
-                  >
-                    <Text>{ue.code}</Text>
-                    <Text>{ue.name}</Text>
-                  </List.Item>
-                </List>
-              )
-            }}
+        <ScrollView style={styles.list}>
+          <UEList
+            ues={ues}
+            onPress={ue =>
+              navigate('Details', { slug: ue.slug, code: ue.code })
+            }
           />
-        </View>
+        </ScrollView>
       </View>
     )
   }
@@ -161,9 +117,6 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center'
-  },
-  item: {
-    marginRight: 20
   },
   list: {
     marginTop: 0

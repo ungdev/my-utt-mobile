@@ -26,8 +26,7 @@ class MyUEScreen extends React.Component {
     this.getUEsFromServer()
     this.getUEsFromMemory()
     this.state = {
-      ues: [],
-      user: null
+      ues: []
     }
   }
   static navigationOptions = ({ navigation }) => {
@@ -54,8 +53,6 @@ class MyUEScreen extends React.Component {
 
   getUEsFromMemory = async () => {
     try {
-      const user = await AsyncStorage.getItem(USER_KEY)
-      if (user) this.setState({ user: JSON.parse(user) })
       const ues = await AsyncStorage.getItem(UES_KEY)
       if (ues) this.setState({ ues: JSON.parse(ues) })
     } catch (e) {
@@ -73,7 +70,8 @@ class MyUEScreen extends React.Component {
     }
   }
   render() {
-    let { ues, user } = this.state
+    const { user } = this.props.screenProps
+    let { ues } = this.state
     const { navigate } = this.props.navigation
     if (ues.length === 0 || !user)
       return (
@@ -118,9 +116,11 @@ class MyUEScreen extends React.Component {
               case 'ct':
                 image = ct
                 break
+              case 'other':
+                image = other
+                break
               default:
-                console.log(ue.category)
-
+                console.log('category not found : ', ue.category)
                 break
             }
             return (

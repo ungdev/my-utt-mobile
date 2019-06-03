@@ -10,11 +10,14 @@ import SearchUEScreen from './screens/SearchUEScreen'
 import UEDetailsScreen from './screens/UEDetailsScreen'
 import UECommentaireScreen from './screens/UECommentaireScreen'
 
+// First Stack is the left button
 const MyUEsStack = createStackNavigator({
   MyUEs: MyUEScreen,
   Details: UEDetailsScreen,
   Commentaires: UECommentaireScreen
 })
+
+// Second Stack is the right button
 const SearchStack = createStackNavigator({
   Search: SearchUEScreen,
   Details: UEDetailsScreen,
