@@ -39,8 +39,6 @@ class MyProfile extends React.Component {
     )
   }
 
-  openModal = link => console.log(link)
-
   render() {
     const { user } = this.props.screenProps
     if (!user) {
@@ -64,6 +62,13 @@ class MyProfile extends React.Component {
         />
         <Text style={styles.fullName}>{user.fullName}</Text>
         <Text style={styles.surname}>({user.surname})</Text>
+        <View style={styles.social}>
+          <SocialButton type='facebook' link={user.facebook} />
+          <SocialButton type='linkedin' link={user.linkedin} />
+          <SocialButton type='viadeo' link={user.viadeo} />
+          <SocialButton type='twitter' link={user.twitter} />
+          <SocialButton type='website' link={user.website} />
+        </View>
         <Divider style={{ width: '90%' }} />
         <ProfileElement
           type='Numéro étudiant'
@@ -118,13 +123,6 @@ class MyProfile extends React.Component {
           value={user.bdeMember}
           icon='bde'
         />*/}
-
-        <SocialButton type='facebook' link={user.facebook} />
-        <SocialButton type='linkedin' link={user.linkedin} />
-        <SocialButton type='viadeo' link={user.viadeo} />
-        <SocialButton type='twitter' link={user.twitter} />
-        <SocialButton type='website' link={user.website} />
-        
       </ScrollView>
     )
   }
@@ -152,6 +150,13 @@ const styles = StyleSheet.create({
   spin: {
     flex: 1,
     justifyContent: 'center',
+    alignItems: 'center'
+  },
+  social: {
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'center',
+    flexWrap: 'wrap',
     alignItems: 'center'
   }
 })

@@ -1,9 +1,10 @@
 import React from 'react'
 import { SocialIcon, Avatar } from 'react-native-elements'
 import { TouchableOpacity } from 'react-native'
+import { WebBrowser } from 'expo'
 
-const openModal = link => console.log('link', link)
-const openNavigator = link => console.log('link', link)
+const openModal = async link => await WebBrowser.openBrowserAsync(link)
+
 const SocialButton = props => {
   if (!props.link) return null
   if (props.type === 'website')
@@ -24,7 +25,7 @@ const SocialButton = props => {
     <SocialIcon
       type={props.type}
       onPress={() => openModal(props.link)}
-      onLongPress={() => openNavigator(props.link)}
+      onLongPress={() => openModal(props.link)}
       style={props.type === 'viadeo' ? { backgroundColor: 'black' } : null}
     />
   )
