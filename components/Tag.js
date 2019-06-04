@@ -16,7 +16,8 @@ const styles = StyleSheet.create({
     padding: 7,
     borderRadius: 4,
     borderWidth: 0.5,
-    borderColor: '#adc6ff'
+    borderColor: '#adc6ff',
+    margin: 5
   },
   text: {
     fontSize: normalize(10),

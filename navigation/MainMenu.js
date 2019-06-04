@@ -78,7 +78,7 @@ class MainMenu extends React.Component {
     let gridContent = [
       [
         {
-          name: 'Mon profile',
+          name: 'Mon profil',
           image: <Icon name='user' size={70} color='#333' />,
           destination: 'profile'
         },

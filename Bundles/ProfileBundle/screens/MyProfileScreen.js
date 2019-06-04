@@ -12,6 +12,7 @@ import { Avatar, Divider } from 'react-native-elements'
 import ProfileElement from '../components/ProfileElement'
 import SocialButton from '../components/SocialButton'
 import moment from 'moment'
+import ProfileUEList from '../components/ProfileUEList'
 
 class MyProfile extends React.Component {
   static navigationOptions = ({ navigation }) =>
@@ -48,7 +49,6 @@ class MyProfile extends React.Component {
         </View>
       )
     }
-    console.log(user)
     const image = user._links.find(link => link.rel === 'user.image')
     const image_uri = 'https://etu.utt.fr' + image.uri // TODO replace by config
     return (
@@ -74,6 +74,11 @@ class MyProfile extends React.Component {
           type='Numéro étudiant'
           value={user.studentId}
           icon='id-card'
+        />
+        <ProfileElement
+          type='Branche'
+          value={user.branch + ' ' + user.level + ' ' + user.speciality}
+          icon='graduation-cap'
         />
         <ProfileElement type='E-mail' value={user.email} icon='envelope' />
         <ProfileElement
@@ -111,11 +116,7 @@ class MyProfile extends React.Component {
           icon='birthday-cake'
           private={user.birthdayPrivacy !== 'public'}
         />
-        <ProfileElement
-          type='Branche'
-          value={user.branch + ' ' + user.level + ' ' + user.speciality}
-          icon='graduation-cap'
-        />
+        <ProfileUEList ues={user.uvs} navigation={this.props.navigation} />
         {/* TODO
           
           <ProfileElement
@@ -123,6 +124,9 @@ class MyProfile extends React.Component {
           value={user.bdeMember}
           icon='bde'
         />*/}
+        {
+          /* TODO BADGES */
+        }
       </ScrollView>
     )
   }
