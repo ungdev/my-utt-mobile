@@ -1,5 +1,6 @@
 import React from 'react'
 import { View, Text, StyleSheet } from 'react-native'
+import { Tooltip } from 'react-native-elements'
 import Icon from 'react-native-vector-icons/FontAwesome'
 
 const ProfileElement = props => {
@@ -8,8 +9,19 @@ const ProfileElement = props => {
     <View style={styles.container}>
       <Icon name={props.icon} size={50} color='#333' />
       <View style={styles.text}>
-        <Text style={styles.type}>{props.type}</Text>
-        <Text style={styles.value}>{props.value}</Text>
+        <View style={styles.typeContainer}>
+          <Text style={styles.type}>{props.type}</Text>
+          {props.private && (
+            <Tooltip popover={<Text>Information privée</Text>}>
+              <Icon name='lock' size={20} color='#000' />
+            </Tooltip>
+          )}
+        </View>
+        {typeof props.value !== Object ? (
+          <Text style={styles.value}>{props.value}</Text>
+        ) : (
+          props.value
+        )}
       </View>
     </View>
   )
@@ -28,7 +40,13 @@ const styles = StyleSheet.create({
   },
   type: {
     fontSize: 20,
-    fontWeight: 'bold'
+    fontWeight: 'bold',
+    marginRight: 10
+  },
+  typeContainer: {
+    flex: 1,
+    flexDirection: 'row',
+    alignItems: 'center'
   },
   value: {
     fontSize: 20
