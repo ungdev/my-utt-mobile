@@ -1,10 +1,9 @@
 import React from 'react'
-import { View, StyleSheet, Image, AsyncStorage } from 'react-native'
+import { View, StyleSheet, Image } from 'react-native'
 import { Button } from 'react-native-paper'
 import fondation from '../../assets/images/fondationUTT.png'
 import utt from '../../assets/images/logo_UTT.png'
-import moment from 'moment'
-import { ACCESS_TOKEN_EXPIRATION_KEY } from '../../constants/StorageKey'
+import { getToken } from '../../services/api'
 
 class LoginPage extends React.Component {
   componentDidMount() {
@@ -14,14 +13,10 @@ class LoginPage extends React.Component {
   autoLogin = async () => {
     try {
       console.log('Try Autologin with old credentials if exist')
-      const expiration_date = await AsyncStorage.getItem(
-        ACCESS_TOKEN_EXPIRATION_KEY
-      )
-      if (expiration_date !== null) {
-        if (moment().isBefore(expiration_date * 1000)) {
-          console.log('AUTOLOGIN SUCCESSFUL')
-          this.props.navigation.navigate('Main')
-        }
+      const token = await getToken()
+      if (token) {
+        console.log('Autologin successfull')
+        this.props.navigation.navigate('Main')
       }
     } catch (e) {
       console.log(e)

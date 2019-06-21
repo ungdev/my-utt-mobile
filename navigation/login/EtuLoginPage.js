@@ -1,35 +1,28 @@
 import React from 'react'
 import { WebView } from 'react-native'
-import axios from 'axios'
 import config from '../../config'
 import { Constants } from 'expo'
 import { AsyncStorage } from 'react-native'
-import moment from 'moment'
-import {
-  CLIENT_ID_KEY,
-  CLIENT_SECRET_KEY,
-  ACCESS_TOKEN_KEY,
-  ACCESS_TOKEN_EXPIRATION_KEY
-} from '../../constants/StorageKey'
+import { CLIENT_ID_KEY, CLIENT_SECRET_KEY } from '../../constants/StorageKey'
+import { getToken } from '../../services/api'
 
 class EtuLoginPage extends React.Component {
   constructor(props) {
     super(props)
-    this.tryLogin()
+    this.tryLogin(false)
   }
 
-  tryLogin = async () => {
+  tryLogin = async (redirect = true) => {
     try {
-      const expiration_date = await AsyncStorage.getItem(
-        ACCESS_TOKEN_EXPIRATION_KEY
-      )
-      if (expiration_date) {
-        if (moment().isBefore(expiration_date * 1000)) {
-          this.props.navigation.navigate('Main')
-        }
+      const token = await getToken()
+      if (token) {
+        this.props.navigation.navigate('Main')
+      } else {
+        if (redirect) this.props.navigation.navigate('Login')
       }
     } catch (e) {
       console.log(e)
+      this.props.navigation.navigate('Login')
     }
   }
 
@@ -37,32 +30,16 @@ class EtuLoginPage extends React.Component {
     const params = url.split('?')[1].split('&')
     const clientId = params[0].split('=')[1]
     const clientSecret = params[1].split('=')[1]
-    this.getToken(clientId, clientSecret)
     try {
       await AsyncStorage.setItem(CLIENT_ID_KEY, clientId)
       await AsyncStorage.setItem(CLIENT_SECRET_KEY, clientSecret)
+      this.tryLogin()
     } catch (e) {
       console.log(e)
+      this.props.navigation.navigate('Login')
     }
   }
 
-  getToken = async (clientId, clientSecret) => {
-    const res = await axios.post(
-      `${
-        config.etu_utt_baseuri
-      }oauth/token?grant_type=client_credentials&scope=${
-        config.etu_utt_scope
-      }&client_id=${clientId}&client_secret=${clientSecret}`
-    )
-    //refresh token ?
-    try {
-      await AsyncStorage.setItem(ACCESS_TOKEN_KEY, res.data.access_token)
-      await AsyncStorage.setItem(ACCESS_TOKEN_EXPIRATION_KEY, res.data.expires)
-    } catch (e) {
-      console.log(e)
-    }
-    this.props.navigation.navigate('Main')
-  }
   render() {
     return (
       <WebView
