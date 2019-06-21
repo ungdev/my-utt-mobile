@@ -4,7 +4,6 @@ import { Appbar } from 'react-native-paper'
 import GridButton from '../components/Menu/GridButton'
 import { ScrollView } from 'react-native-gesture-handler'
 import Icon from 'react-native-vector-icons/FontAwesome'
-import moment from 'moment'
 import {
   ACCESS_TOKEN_KEY,
   ACCESS_TOKEN_EXPIRATION_KEY,
@@ -12,7 +11,7 @@ import {
   CLIENT_SECRET_KEY,
   USER_KEY
 } from '../constants/StorageKey'
-import { fetchUser } from '../services/api'
+import { fetchUser, getToken } from '../services/api'
 import { registerForExpoPushNotifications } from '../services/expoPushNotifications'
 
 class MainMenu extends React.Component {
@@ -24,18 +23,15 @@ class MainMenu extends React.Component {
 
   checkToken = async () => {
     try {
-      const expiration_date = await AsyncStorage.getItem(
-        ACCESS_TOKEN_EXPIRATION_KEY
-      )
-      if (expiration_date) {
-        if (moment().isAfter(expiration_date * 1000)) {
-          this.props.navigation.navigate('Login')
-        } else {
-          this.getUserInformations()
-        }
+      const token = await getToken()
+      if (token) {
+        this.getUserInformations()
+      } else {
+        this.props.navigation.navigate('Login')
       }
     } catch (e) {
       console.log(e)
+      this.props.navigation.navigate('Login')
     }
   }
   click = async d => {
@@ -79,45 +75,46 @@ class MainMenu extends React.Component {
       [
         {
           name: 'Mon profil',
-          image: <Icon name='user' size={70} color='#333' />,
+          image: 'user',
           destination: 'profile'
         },
         {
           name: 'Guide des UEs',
-          image: <Icon name='book' size={70} color='#333' />,
+          image: 'book',
           destination: 'ue'
         },
         {
           name: 'Emploi du temps',
-          image: <Icon name='table' size={70} color='#333' />
+          image: 'table'
         }
       ],
       [
         {
           name: 'Événements',
-          image: <Icon name='calendar' size={70} color='#333' />
+          image: 'calendar'
         },
         {
           name: 'Chat',
-          image: <Icon name='comments' size={70} color='#333' />
+          image: 'comments'
         },
         {
           name: 'Paramètres',
-          image: <Icon name='gear' size={70} color='#333' />
+          image: 'gear'
         }
       ],
       [
         {
           name: 'Trombinoscopes',
-          image: <Icon name='address-book' size={70} color='#333' />,
+          image: 'address-book',
           destination: 'trombi'
         },
         {
-          name: ''
+          name: 'Associations',
+          image: 'users'
         },
         {
           name: 'Se déconnecter',
-          image: <Icon name='sign-out' size={70} color='#333' />,
+          image: 'sign-out',
           destination: 'logout'
         }
       ]
@@ -130,7 +127,7 @@ class MainMenu extends React.Component {
           <GridButton
             key={key++}
             title={section.name}
-            image={section.image}
+            image={<Icon name={section.image} size={70} color='#333' />}
             onPress={() => this.click(section.destination)}
           />
         )

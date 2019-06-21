@@ -3,8 +3,8 @@ import { setExpoPushToken } from './api'
 import { Alert } from 'react-native'
 
 const _handleNotification = notification => {
-  if (notification.remote) {
-    Alert.alert(notification.data.title, notification.data.message)
+  if (notification.remote && notification.data && notification.data.title) {
+    Alert.alert(notification.data.title, notification.data.message || '')
   }
 }
 
