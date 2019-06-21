@@ -61,7 +61,11 @@ class MyProfile extends React.Component {
           }}
         />
         <Text style={styles.fullName}>{user.fullName}</Text>
-        <Text style={styles.surname}>({user.surname})</Text>
+        {user.surname ? (
+          <Text style={styles.surname}>({user.surname})</Text>
+        ) : (
+          <Text />
+        )}
         <View style={styles.social}>
           <SocialButton type='facebook' link={user.facebook} />
           <SocialButton type='linkedin' link={user.linkedin} />
@@ -77,7 +81,12 @@ class MyProfile extends React.Component {
         />
         <ProfileElement
           type='Branche'
-          value={user.branch + ' ' + user.level + ' ' + user.speciality}
+          value={
+            user.branch +
+            ' ' +
+            user.level +
+            (user.speciality ? ' ' + user.speciality : '')
+          }
           icon='graduation-cap'
         />
         <ProfileElement type='E-mail' value={user.email} icon='envelope' />
@@ -124,9 +133,7 @@ class MyProfile extends React.Component {
           value={user.bdeMember}
           icon='bde'
         />*/}
-        {
-          /* TODO BADGES */
-        }
+        {/* TODO BADGES */}
       </ScrollView>
     )
   }
