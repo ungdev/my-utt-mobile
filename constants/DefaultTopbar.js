@@ -15,7 +15,7 @@ const Topbar = (navigation, title) => {
         <Icon
           name='angle-left'
           size={32}
-          style={{ marginLeft: 10 }}
+          style={{ paddingHorizontal: 15 }}
           color='#fff'
         />
       </TouchableOpacity>
