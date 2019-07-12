@@ -1,4 +1,5 @@
-import { Permissions, Notifications } from 'expo'
+import { Notifications } from 'expo'
+import Permissions from 'expo-permissions'
 import { setExpoPushToken } from './api'
 import { Alert } from 'react-native'
 

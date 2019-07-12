@@ -1,7 +1,7 @@
 import React from 'react'
 import { WebView } from 'react-native'
 import config from '../../config'
-import { Constants } from 'expo'
+import Constants from 'expo-constants'
 import { AsyncStorage } from 'react-native'
 import { CLIENT_ID_KEY, CLIENT_SECRET_KEY } from '../../constants/StorageKey'
 import { getToken } from '../../services/api'

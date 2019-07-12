@@ -1,7 +1,9 @@
 import React from 'react'
 import { Platform, StatusBar, StyleSheet, View } from 'react-native'
 import { Provider as PaperProvider } from 'react-native-paper'
-import { AppLoading, Asset, Font, Icon } from 'expo'
+import { AppLoading } from 'expo'
+import * as Font from 'expo-font'
+import * as Icon from '@expo/vector-icons'
 import AppNavigator from './navigation/AppNavigator'
 
 export default class App extends React.Component {
@@ -52,10 +54,6 @@ export default class App extends React.Component {
 
   _loadResourcesAsync = async () => {
     return Promise.all([
-      Asset.loadAsync([
-        require('./assets/images/robot-dev.png'),
-        require('./assets/images/robot-prod.png')
-      ]),
       Font.loadAsync({
         // This is the font that we are using for our tab bar
         ...Icon.Ionicons.font,
