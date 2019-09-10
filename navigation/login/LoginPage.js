@@ -1,9 +1,10 @@
 import React from 'react'
 import { ActivityIndicator, View, StyleSheet, Image } from 'react-native'
-import { Button } from 'react-native-paper'
-import fondation from '../../assets/images/fondationUTT.png'
-import utt from '../../assets/images/logo_UTT.png'
+import Button from '../../components/Button'
 import { getToken } from '../../services/api'
+import EtuLoginPage from './EtuLoginPage'
+import { AsyncStorage } from 'react-native'
+import { CLIENT_ID_KEY, CLIENT_SECRET_KEY } from '../../constants/StorageKey'
 
 class LoginPage extends React.Component {
   componentDidMount() {
@@ -16,7 +17,8 @@ class LoginPage extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      fetch: true
+      fetch: true,
+      modalVisible: false
     }
   }
   autoLogin = async () => {
@@ -32,8 +34,27 @@ class LoginPage extends React.Component {
     }
     if (this.mount) this.setState({ fetch: false })
   }
+  closeModal = (url = null) => {
+    this.setState({ modalVisible: false, fetch: true })
+    if (url) this.login(url)
+    else {
+      this.setState({ fetch: false })
+    }
+  }
 
-  login = () => this.props.navigation.navigate('EtuLogin')
+  login = async url => {
+    const params = url.split('?')[1].split('&')
+    const clientId = params[0].split('=')[1]
+    const clientSecret = params[1].split('=')[1]
+    try {
+      await AsyncStorage.setItem(CLIENT_ID_KEY, clientId)
+      await AsyncStorage.setItem(CLIENT_SECRET_KEY, clientSecret)
+      this.autoLogin()
+    } catch (e) {
+      console.log(e)
+      this.setState({ fetch: false })
+    }
+  }
   render() {
     if (this.state.fetch)
       return (
@@ -43,27 +64,18 @@ class LoginPage extends React.Component {
       )
     return (
       <View style={styles.container}>
+        <EtuLoginPage
+          visible={this.state.modalVisible}
+          closeModal={this.closeModal}
+        />
         <Image
           source={require('../../assets/images/icon_trans.png')}
           style={{ width: 300, height: 300 }}
         />
-        <View style={styles.partners}>
-          <Image
-            style={{ flex: 4, marginRight: 10, height: 300 }}
-            resizeMode='contain'
-            source={fondation}
-          />
-          <Image
-            style={{ flex: 4, marginLeft: 10, height: 300 }}
-            resizeMode='contain'
-            source={utt}
-          />
-        </View>
-        <View style={styles.buttons}>
-          <Button mode='contained' onPress={this.login}>
-            Se connecter
-          </Button>
-        </View>
+        <Button
+          onPress={() => this.setState({ modalVisible: true })}
+          title='Connexion avec le site étudiant'
+        />
       </View>
     )
   }
@@ -74,18 +86,39 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#DCDCDC'
+    backgroundColor: '#fff'
   },
-  partners: {
-    flex: 2,
+  inputContainer: {
+    borderBottomColor: '#F5FCFF',
+    backgroundColor: '#FFFFFF',
+    borderRadius: 30,
+    borderBottomWidth: 1,
+    width: 250,
+    height: 45,
+    marginBottom: 20,
     flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'flex-start'
+    alignItems: 'center'
   },
-  buttons: {
-    flex: 8,
+  inputs: {
+    height: 45,
+    marginLeft: 16,
+    borderBottomColor: '#FFFFFF',
+    flex: 1
+  },
+  inputIcon: {
+    width: 30,
+    height: 30,
+    marginLeft: 15,
+    justifyContent: 'center'
+  },
+  ancientText: {
+    color: 'black',
+    marginBottom: 10
+  },
+  spin: {
+    flex: 1,
     justifyContent: 'center',
-    alignContent: 'center'
+    alignItems: 'center'
   }
 })
 
