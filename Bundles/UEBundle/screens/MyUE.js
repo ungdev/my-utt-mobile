@@ -14,8 +14,8 @@ class MyUEScreen extends React.Component {
       ues: []
     }
   }
-  static navigationOptions = ({ navigation }) =>
-    DefaultTopbar(navigation, 'Mes UEs')
+  static navigationOptions = ({ screenProps }) =>
+    DefaultTopbar({ navigate: screenProps.goTo }, 'Mes UEs')
 
   getUEsFromMemory = async () => {
     try {
@@ -62,7 +62,9 @@ class MyUEScreen extends React.Component {
       <View style={styles.container}>
         <UEList
           ues={myues}
-          onPress={ue => navigate('Details', { slug: ue.slug, code: ue.code })}
+          onPress={ue =>
+            navigate('UEDetails', { slug: ue.slug, code: ue.code })
+          }
         />
       </View>
     )

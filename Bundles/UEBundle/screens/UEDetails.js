@@ -15,7 +15,7 @@ import { fetchUEDetails } from '../../../services/api'
 import { normalize } from '../../../services/font'
 import Tag from '../../../components/Tag'
 
-class UEDetailsScreen extends React.Component {
+class UEDetails extends React.Component {
   constructor(props) {
     super(props)
     this.getDetails(props.navigation.getParam('slug'))
@@ -93,7 +93,7 @@ class UEDetailsScreen extends React.Component {
           {user && user.isStudent && (
             <Button
               onPress={() =>
-                navigation.navigate('Commentaires', {
+                navigation.navigate('UECommentaries', {
                   slug: navigation.getParam('slug', '...'),
                   code: navigation.getParam('code', '...')
                 })
@@ -155,4 +155,4 @@ const styles = StyleSheet.create({
   back: { flexDirection: 'row', alignItems: 'center' }
 })
 
-export default UEDetailsScreen
+export default UEDetails

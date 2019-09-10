@@ -13,7 +13,7 @@ import { UES_KEY } from '../../../constants/StorageKey'
 import DefaultTopbar from '../../../constants/DefaultTopbar'
 import UEList from '../components/UEList'
 
-class SearchUEScreen extends React.Component {
+class SearchUE extends React.Component {
   constructor(props) {
     super(props)
     this.getUEsFromServer()
@@ -23,9 +23,9 @@ class SearchUEScreen extends React.Component {
       search: ''
     }
   }
-  static navigationOptions = ({ navigation }) =>
-    DefaultTopbar(navigation, 'Rechercher une UE')
 
+  static navigationOptions = ({ screenProps }) =>
+    DefaultTopbar({ navigate: screenProps.goTo }, 'Rechercher une UE')
   getUEsFromMemory = async () => {
     try {
       const ues = await AsyncStorage.getItem(UES_KEY)
@@ -77,7 +77,7 @@ class SearchUEScreen extends React.Component {
           <UEList
             ues={ues}
             onPress={ue =>
-              navigate('Details', { slug: ue.slug, code: ue.code })
+              navigate('UEDetails', { slug: ue.slug, code: ue.code })
             }
           />
         </ScrollView>
@@ -102,4 +102,4 @@ const styles = StyleSheet.create({
   }
 })
 
-export default SearchUEScreen
+export default SearchUE

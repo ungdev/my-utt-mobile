@@ -14,7 +14,7 @@ import { Card } from '@ant-design/react-native'
 import HTML from 'react-native-render-html'
 import moment from 'moment'
 
-class UEDetailsScreen extends React.Component {
+class UECommentaries extends React.Component {
   constructor(props) {
     super(props)
     this.getCommentaires(props.navigation.getParam('slug'))
@@ -102,4 +102,4 @@ const styles = StyleSheet.create({
   back: { flexDirection: 'row', alignItems: 'center' }
 })
 
-export default UEDetailsScreen
+export default UECommentaries

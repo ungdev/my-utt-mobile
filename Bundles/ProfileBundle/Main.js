@@ -2,12 +2,12 @@ import {
   createStackNavigator,
 } from 'react-navigation'
 
-import MyProfile from './screens/MyProfileScreen'
-import UEDetailsScreen from '../UEBundle/screens/UEDetailsScreen'
-import UECommentaireScreen from '../UEBundle/screens/UECommentaireScreen'
+import UserProfile from './screens/UserProfile'
+import UEDetails from '../UEBundle/screens/UEDetails'
+import UECommentaries from '../UEBundle/screens/UECommentaries'
 
 export default createStackNavigator({
-  MyProfile: MyProfile,
-  Details: UEDetailsScreen,
-  Commentaires: UECommentaireScreen
+  UserProfile,
+  UEDetails,
+  UECommentaries
 })

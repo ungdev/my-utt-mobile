@@ -14,7 +14,7 @@ import SocialButton from '../components/SocialButton'
 import moment from 'moment'
 import ProfileUEList from '../components/ProfileUEList'
 
-class MyProfile extends React.Component {
+class UserProfile extends React.Component {
   static navigationOptions = ({ navigation }) =>
     DefaultTopbar(navigation, 'Mon Profile')
 
@@ -172,4 +172,4 @@ const styles = StyleSheet.create({
   }
 })
 
-export default MyProfile
+export default UserProfile
