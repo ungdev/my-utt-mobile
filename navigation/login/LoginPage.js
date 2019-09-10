@@ -1,5 +1,5 @@
 import React from 'react'
-import { View, StyleSheet, Image } from 'react-native'
+import { ActivityIndicator, View, StyleSheet, Image } from 'react-native'
 import { Button } from 'react-native-paper'
 import fondation from '../../assets/images/fondationUTT.png'
 import utt from '../../assets/images/logo_UTT.png'
@@ -8,8 +8,17 @@ import { getToken } from '../../services/api'
 class LoginPage extends React.Component {
   componentDidMount() {
     this.autoLogin()
+    this.mount = true
   }
-
+  componentWillUnmount() {
+    this.mount = false
+  }
+  constructor(props) {
+    super(props)
+    this.state = {
+      fetch: true
+    }
+  }
   autoLogin = async () => {
     try {
       console.log('Try Autologin with old credentials if exist')
@@ -21,12 +30,23 @@ class LoginPage extends React.Component {
     } catch (e) {
       console.log(e)
     }
+    if (this.mount) this.setState({ fetch: false })
   }
 
   login = () => this.props.navigation.navigate('EtuLogin')
   render() {
+    if (this.state.fetch)
+      return (
+        <View style={styles.spin}>
+          <ActivityIndicator size='large' color='#4098ff' />
+        </View>
+      )
     return (
       <View style={styles.container}>
+        <Image
+          source={require('../../assets/images/icon_trans.png')}
+          style={{ width: 300, height: 300 }}
+        />
         <View style={styles.partners}>
           <Image
             style={{ flex: 4, marginRight: 10, height: 300 }}
@@ -52,10 +72,9 @@ class LoginPage extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#F5FCFF',
     justifyContent: 'center',
-    alignContent: 'center',
-    padding: 20
+    alignItems: 'center',
+    backgroundColor: '#DCDCDC'
   },
   partners: {
     flex: 2,

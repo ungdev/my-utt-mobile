@@ -1,7 +1,6 @@
 import React from 'react'
 import { createSwitchNavigator } from 'react-navigation'
 
-//import MainNavigator from './MainNavigator'
 import MainMenu from './MainMenu'
 import LoginPage from './login/LoginPage'
 import EtuLoginPage from './login/EtuLoginPage'

@@ -1,7 +1,7 @@
 import { Notifications } from 'expo'
-import Permissions from 'expo-permissions'
 import { setExpoPushToken } from './api'
 import { Alert } from 'react-native'
+import * as Permissions from 'expo-permissions'
 
 const _handleNotification = notification => {
   if (notification.remote && notification.data && notification.data.title) {

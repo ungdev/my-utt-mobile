@@ -2,10 +2,10 @@
   "main": "node_modules/expo/AppEntry.js",
   "scripts": {
     "start": "expo start",
-    "android": "expo start --android",
-    "ios": "expo start --ios",
-    "eject": "expo eject",
-    "test": "node ./node_modules/jest/bin/jest.js --watchAll"
+    "publish": "expo publish",
+    "build:ios": "expo build:ios",
+    "upload:ios": "expo upload:ios",
+    "build:android": "expo build:android"
   },
   "jest": {
     "preset": "jest-expo"
@@ -18,7 +18,7 @@
     "expo": "^33.0.0",
     "expo-constants": "^5.0.1",
     "expo-font": "~5.0.1",
-    "expo-permissions": "^5.0.1",
+    "expo-permissions": "^6.0.0",
     "handlebars": "^4.1.2",
     "moment": "^2.24.0",
     "react": "16.8.3",
@@ -27,7 +27,6 @@
     "react-native-elements": "^1.1.0",
     "react-native-paper": "^2.7.0",
     "react-native-render-html": "^4.1.2",
-    "react-native-ui-kitten": "^3.1.2",
     "react-native-vector-icons": "^6.2.0",
     "react-navigation": "^2.18.2"
   },
