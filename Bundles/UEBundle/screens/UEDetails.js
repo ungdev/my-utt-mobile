@@ -10,7 +10,6 @@ import {
   View
 } from 'react-native'
 import { Button } from '@ant-design/react-native'
-import Icon from 'react-native-vector-icons/FontAwesome'
 import { fetchUEDetails } from '../../../services/api'
 import { normalize } from '../../../services/font'
 import Tag from '../../../components/Tag'
@@ -52,6 +51,19 @@ class UEDetails extends React.Component {
     }
   }
 
+  translateDiplome = diplomes => {
+    switch (diplomes) {
+      case 'UV mast.':
+        return 'UE Master'
+      case 'UV ing.':
+        return 'UE Ingénieur'
+      case 'UV ing. ou UV mast.':
+        return 'UE Ingénieur ou Master'
+      default:
+        return ''
+    }
+  }
+
   render() {
     const { ue } = this.state
     const { navigation, screenProps } = this.props
@@ -62,11 +74,14 @@ class UEDetails extends React.Component {
           <ActivityIndicator size='large' color='#4098ff' />
         </View>
       )
+    console.log(ue)
     return (
       <View style={styles.container}>
         <ScrollView style={styles.subcontainer}>
-          <Text style={styles.title}>
-            {ue.code} - {ue.name}
+          <Text style={styles.title}>{ue.name}</Text>
+          {ue.isOld > 0 && <Text style={styles.closed}>(UE fermée)</Text>}
+          <Text style={styles.subtitle}>
+            {this.translateDiplome(ue.diplomes)}
           </Text>
           <View style={{ flexDirection: 'row' }}>
             <Tag style={styles.tag}>Automne</Tag>
@@ -77,18 +92,25 @@ class UEDetails extends React.Component {
           <Text style={styles.p}>{ue.objectifs}</Text>
           <Text style={styles.subtitle}>Programme : </Text>
           <Text style={styles.p}>{ue.programme}</Text>
+          {ue.mineurs !== '' && <Text style={styles.p}>{ue.mineurs}</Text>}
           <Text style={styles.attributes}>Crédits : {ue.credits}</Text>
           {ue.cm > 0 && (
-            <Text style={styles.attributes}>Cours magistraux : {ue.cm}</Text>
+            <Text style={styles.attributes}>Cours magistraux : {ue.cm}h</Text>
           )}
           {ue.td > 0 && (
-            <Text style={styles.attributes}>Traveaux dirigés : {ue.td}</Text>
+            <Text style={styles.attributes}>Traveaux dirigés : {ue.td}h</Text>
           )}
           {ue.tp > 0 && (
-            <Text style={styles.attributes}>Traveaux pratiques : {ue.tp}</Text>
+            <Text style={styles.attributes}>Traveaux pratiques : {ue.tp}h</Text>
+          )}
+          {ue.projet > 0 && (
+            <Text style={styles.attributes}>Projets : {ue.projet}h</Text>
           )}
           {ue.the > 0 && (
-            <Text style={styles.attributes}>Travail personnel : {ue.the}</Text>
+            <Text style={styles.attributes}>Travail personnel : {ue.the}h</Text>
+          )}
+          {ue.stage > 0 && (
+            <Text style={styles.attributes}>Stage : {ue.stage} semaines</Text>
           )}
           {user && user.isStudent && (
             <Button
@@ -133,6 +155,11 @@ const styles = StyleSheet.create({
     fontSize: normalize(30),
     textAlign: 'center',
     marginBottom: 20
+  },
+  closed: {
+    fontSize: normalize(20),
+    textAlign: 'center',
+    marginBottom: 5
   },
   subtitle: {
     fontSize: normalize(20),
