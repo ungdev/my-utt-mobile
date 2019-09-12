@@ -54,6 +54,9 @@ class MainMenu extends React.Component {
       case 'profile':
         this.props.navigation.navigate('Profile')
         break
+      case 'events':
+        this.props.navigation.navigate('Events')
+        break
       case 'logout':
         this.logout()
         break
@@ -113,7 +116,8 @@ class MainMenu extends React.Component {
       },
       {
         name: 'Événements',
-        icon: 'calendar'
+        icon: 'calendar',
+        destination: 'events'
       },
       {
         name: 'Chat',
@@ -138,7 +142,7 @@ class MainMenu extends React.Component {
         destination: 'logout'
       }
     ]
-    
+
     let gridContent = []
     for (let i = 0; i < content.length; i += 3) {
       gridContent.push(content.slice(i, i + 3))

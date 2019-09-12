@@ -90,3 +90,11 @@ export const setExpoPushToken = async pushToken => {
   )
   return res
 }
+
+export const fetchEvents = async (after, before) => {
+  const token = await getToken()
+  const res = await api.get(`events?after=${after}&before=${before}`, {
+    headers: { Authorization: `Bearer ${token}` }
+  })
+  return res.data.events
+}
