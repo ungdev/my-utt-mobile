@@ -1,10 +1,12 @@
 import React from 'react'
 import {
+  ActivityIndicator,
+  Alert,
+  Linking,
   ScrollView,
-  View,
   StyleSheet,
   Text,
-  ActivityIndicator
+  View
 } from 'react-native'
 import Icon from 'react-native-vector-icons/FontAwesome'
 import DefaultTopbar from '../../../constants/DefaultTopbar'
@@ -40,6 +42,37 @@ class UserProfile extends React.Component {
     )
   }
 
+  showPhonePopup = user => {
+    Alert.alert(
+      'Voulez vous appeler ou envoyer un message ?',
+      `${user.fullName} ${user.phone}`,
+      [
+        {
+          text: 'Appeler',
+          onPress: () => Linking.openURL(`tel:${user.phone}`)
+        },
+        {
+          text: 'Message',
+          onPress: () => Linking.openURL(`sms:${user.phone}`)
+        },
+        { text: 'Annuler' }
+      ]
+    )
+  }
+
+  showMailPopup = (name, mail) => {
+    Alert.alert(
+      'Voulez vous envoyer un mail à cette personne ?',
+      `${name} ${mail}`,
+      [
+        {
+          text: 'Ok',
+          onPress: () => Linking.openURL(`mailto:${mail}`)
+        },
+        { text: 'Annuler' }
+      ]
+    )
+  }
   render() {
     const { user } = this.props.screenProps
     if (!user) {
@@ -89,18 +122,25 @@ class UserProfile extends React.Component {
           }
           icon='graduation-cap'
         />
-        <ProfileElement type='E-mail' value={user.email} icon='envelope' />
+        <ProfileElement
+          type='E-mail'
+          value={user.email}
+          icon='envelope'
+          onPress={() => this.showMailPopup(user.fullName, user.email)}
+        />
         <ProfileElement
           type='E-mail personnel'
           value={user.personnalMail}
           icon='envelope'
           private={user.personnalMailPrivacy !== 'public'}
+          onPress={() => this.showMailPopup(user.fullName, user.personnalMail)}
         />
         <ProfileElement
           type='Téléphone'
           value={user.phone}
           icon='phone'
           private={user.phonePrivacy !== 'public'}
+          onPress={() => this.showPhonePopup(user)}
         />
         <ProfileElement
           type='Adresse'

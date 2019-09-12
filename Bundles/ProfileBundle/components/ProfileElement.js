@@ -1,11 +1,11 @@
 import React from 'react'
-import { View, Text, StyleSheet } from 'react-native'
+import { View, Text, TouchableOpacity, StyleSheet } from 'react-native'
 import { Tooltip } from 'react-native-elements'
 import Icon from 'react-native-vector-icons/FontAwesome'
 
 const ProfileElement = props => {
   if (props.value === null) return null
-  return (
+  const component = (
     <View style={styles.container}>
       <Icon name={props.icon} size={50} color='#333' />
       <View style={styles.text}>
@@ -25,6 +25,15 @@ const ProfileElement = props => {
       </View>
     </View>
   )
+  if (props.onPress) {
+    return (
+      <TouchableOpacity onPress={props.onPress} style={styles.button}>
+        {component}
+      </TouchableOpacity>
+    )
+  } else {
+    return component
+  }
 }
 
 const styles = StyleSheet.create({
@@ -50,7 +59,8 @@ const styles = StyleSheet.create({
   },
   value: {
     fontSize: 20
-  }
+  },
+  button: { flex: 1, alignSelf: 'stretch' }
 })
 
 export default ProfileElement
