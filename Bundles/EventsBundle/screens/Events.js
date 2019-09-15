@@ -1,11 +1,12 @@
 import React from 'react'
-import { AsyncStorage, ScrollView, StyleSheet, View } from 'react-native'
+import { AsyncStorage, ScrollView, StyleSheet, Text, View } from 'react-native'
 import DefaultTopbar from '../../../constants/DefaultTopbar'
 import { Calendar } from 'react-native-calendars'
 import moment from 'moment'
 import { LocaleConfig } from 'react-native-calendars'
 import { EVENTS_KEY } from '../../../constants/StorageKey'
 import { fetchEvents } from '../../../services/api'
+import EventLine from '../components/EventLine'
 
 LocaleConfig.locales['fr'] = {
   monthNames: [
@@ -80,7 +81,7 @@ class Events extends React.Component {
   getEventsFromServer = async date => {
     try {
       const { fetchedMonths } = this.state
-      if(fetchedMonths.find(month => month === date)) return
+      if (fetchedMonths.find(month => month === date)) return
       fetchedMonths.push(date)
       this.setState({ fetching: true, fetchedMonths })
       const nextdate = moment(date)
@@ -129,8 +130,16 @@ class Events extends React.Component {
     if (!markedDates[current]) markedDates[current] = {}
     markedDates[current].selected = true
     markedDates[current].selectedColor = '#4098ff'
+    const dayEvents = events.filter(
+      event => moment(event.begin.date).format('YYYY-MM-DD') === current
+    )
+    if (dayEvents.length > 0) {
+      for (let i = dayEvents.length; i < 5; i++) {
+        dayEvents.push('empty')
+      }
+    }
     return (
-      <View>
+      <View style={{ flex: 1 }}>
         <Calendar
           current={current}
           onDayPress={day => {
@@ -150,10 +159,44 @@ class Events extends React.Component {
           markedDates={markedDates}
           markingType={'multi-dot'}
           displayLoadingIndicator={fetching}
+          style={styles.calendar}
         />
+        <ScrollView style={styles.dayEvents}>
+          {dayEvents.length > 0 ? (
+            dayEvents.map((event, index) =>
+              event === 'empty' ? (
+                <EventLine empty key={index}></EventLine>
+              ) : (
+                <EventLine
+                  key={index}
+                  category={event.category}
+                  start={event.begin.date}
+                  end={event.end.date}
+                >
+                  {event.title}
+                </EventLine>
+              )
+            )
+          ) : (
+            <React.Fragment>
+              <EventLine empty></EventLine>
+              <EventLine empty></EventLine>
+              <EventLine empty>Aucun événement ce jour</EventLine>
+              <EventLine empty></EventLine>
+              <EventLine empty></EventLine>
+            </React.Fragment>
+          )}
+        </ScrollView>
       </View>
     )
   }
 }
+
+const styles = StyleSheet.create({
+  dayEvents: {
+    alignSelf: 'stretch'
+  },
+  calendar: { marginBottom: 2 }
+})
 
 export default Events
