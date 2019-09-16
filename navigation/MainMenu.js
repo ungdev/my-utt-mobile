@@ -5,8 +5,7 @@ import {
   View,
   StyleSheet,
   AsyncStorage,
-  Dimensions,
-  Linking
+  Dimensions
 } from 'react-native'
 import GridButton from '../components/Menu/GridButton'
 import { ScrollView } from 'react-native-gesture-handler'
@@ -16,9 +15,10 @@ import {
   ACCESS_TOKEN_EXPIRATION_KEY,
   CLIENT_ID_KEY,
   CLIENT_SECRET_KEY,
-  USER_KEY
+  USER_KEY,
+  ORGAS_KEY,
 } from '../constants/StorageKey'
-import { fetchUser, getToken } from '../services/api'
+import { fetchUser, fetchOrgas, getToken } from '../services/api'
 import { registerForExpoPushNotifications } from '../services/expoPushNotifications'
 import DefaultTopbar from '../constants/DefaultTopbar'
 import { createStackNavigator } from 'react-navigation'
@@ -37,7 +37,8 @@ class MainMenu extends React.Component {
     try {
       const token = await getToken()
       if (token) {
-        this.getUserInformations()
+        this.getUserFromMemory()
+        this.updateUser()
       } else {
         this.props.navigation.navigate('Login')
       }
@@ -77,12 +78,43 @@ class MainMenu extends React.Component {
     }
   }
 
-  getUserInformations = async () => {
+  getUserFromMemory = async () => {
+    try {
+      const userInMemory = await AsyncStorage.getItem(USER_KEY)
+      if (!userInMemory) return
+      const user = JSON.parse(userInMemory)
+      this.props.screenProps.setUser(user)
+      this.getOrgasFromMemory()
+    } catch (e) {
+      console.log(e.response || e)
+    }
+  }
+  updateUser = async () => {
     try {
       const user = await fetchUser()
-      console.log('user:', user)
       await AsyncStorage.setItem(USER_KEY, JSON.stringify(user))
       this.props.screenProps.setUser(user)
+      this.updateOrgas()
+    } catch (e) {
+      console.log(e.response || e)
+      this.logout()
+    }
+  }
+  getOrgasFromMemory = async () => {
+    try {
+      const orgasInMemory = await AsyncStorage.getItem(ORGAS_KEY)
+      if (!orgasInMemory) return
+      const orgas = JSON.parse(orgasInMemory)
+      this.props.screenProps.setOrgas(orgas)
+    } catch (e) {
+      console.log(e.response || e)
+    }
+  }
+  updateOrgas = async () => {
+    try {
+      const orgas = await fetchOrgas()
+      await AsyncStorage.setItem(ORGAS_KEY, JSON.stringify(orgas))
+      this.props.screenProps.setOrgas(orgas)
     } catch (e) {
       console.log(e.response || e)
       this.logout()

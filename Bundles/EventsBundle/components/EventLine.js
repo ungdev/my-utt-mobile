@@ -1,5 +1,5 @@
 import React from 'react'
-import { View, Text, TouchableOpacity, StyleSheet } from 'react-native'
+import { Image, Text, TouchableOpacity, StyleSheet, View } from 'react-native'
 import moment from 'moment'
 
 getColorByCategory = category => {
@@ -23,7 +23,7 @@ const EventLine = props =>
       <Text style={styles.empty}>{props.children}</Text>
     </View>
   ) : (
-    <TouchableOpacity>
+    <TouchableOpacity onPress={props.onPress}>
       <View style={styles.container}>
         <View style={styles.dates}>
           <Text>{moment(props.start).format('HH:mm')}</Text>
@@ -50,9 +50,14 @@ const EventLine = props =>
           <Text numberOfLines={2} style={{ flex: 1 }}>
             {props.children}
           </Text>
-          <Text
-            style={{ width: 50, backgroundColor: 'gray', alignSelf: 'stretch', marginHorizontal: 2 }}
-          ></Text>
+          {props.image !== null && (
+            <Image
+              source={{
+                uri: props.image
+              }}
+              style={{ width: 50, height: 50, marginHorizontal: 2 }}
+            />
+          )}
         </View>
       </View>
     </TouchableOpacity>

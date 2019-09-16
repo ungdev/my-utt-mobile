@@ -28,16 +28,23 @@ class AppNavigator extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      user: null
+      user: null,
+      orgas: null
     }
   }
 
   setUser = user => this.setState({ user })
-  
+  setOrgas = orgas => this.setState({ orgas })
+
   render() {
     return (
       <Navigator
-        screenProps={{ user: this.state.user, setUser: this.setUser }}
+        screenProps={{
+          user: this.state.user,
+          setUser: this.setUser,
+          orgas: this.state.orgas,
+          setOrgas: this.setOrgas
+        }}
       />
     )
   }

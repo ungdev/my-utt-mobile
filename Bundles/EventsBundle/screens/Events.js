@@ -111,8 +111,15 @@ class Events extends React.Component {
     }
   }
 
+  getOrgaImageLink = orga => {
+    if (!orga) return false
+    return (
+      'https://etu.utt.fr' + orga._links.find(link => link.rel === 'orga.image').uri
+    )
+  }
   render() {
     const { current, fetching, events } = this.state
+    const { orgas } = this.props.screenProps
     let markedDates = {}
     events.forEach((event, index) => {
       const date = moment(event.begin.date).format('YYYY-MM-DD')
@@ -130,9 +137,14 @@ class Events extends React.Component {
     if (!markedDates[current]) markedDates[current] = {}
     markedDates[current].selected = true
     markedDates[current].selectedColor = '#4098ff'
-    const dayEvents = events.filter(
-      event => moment(event.begin.date).format('YYYY-MM-DD') === current
-    )
+    const dayEvents = events
+      .filter(
+        event => moment(event.begin.date).format('YYYY-MM-DD') === current
+      )
+      .map(event => ({
+        ...event,
+        orga: orgas.find(orga => orga.login === event.orga)
+      }))
     if (dayEvents.length > 0) {
       for (let i = dayEvents.length; i < 5; i++) {
         dayEvents.push('empty')
@@ -172,6 +184,8 @@ class Events extends React.Component {
                   category={event.category}
                   start={event.begin.date}
                   end={event.end.date}
+                  image={this.getOrgaImageLink(event.orga)}
+                  onPress={() => console.log(event)}
                 >
                   {event.title}
                 </EventLine>
