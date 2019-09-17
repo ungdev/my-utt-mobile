@@ -27,7 +27,8 @@
       "bundleIdentifier": "fr.uttnetgroup.myutt"
     },
     "android": {
-      "package": "fr.uttnetgroup.myutt"
+      "package": "fr.uttnetgroup.myutt",
+      "versionCode": 1002000
     }
   }
 }
