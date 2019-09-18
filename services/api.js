@@ -106,3 +106,10 @@ export const fetchEvents = async (after, before) => {
   })
   return res.data.events
 }
+export const fetchEvent = async (id) => {
+  const token = await getToken()
+  const res = await api.get(`events/${id}`, {
+    headers: { Authorization: `Bearer ${token}` }
+  })
+  return res.data.event
+}

@@ -92,7 +92,7 @@ class Events extends React.Component {
         nextdate.substr(0, nextdate.length - 2) + '01'
       )
       const oldevents = this.state.events
-      let events = [...oldevents, ...newevents]
+      let events = [...newevents, ...oldevents]
       for (let i = 0; i < events.length; ++i) {
         for (let j = i + 1; j < events.length; ++j) {
           if (
@@ -112,9 +112,10 @@ class Events extends React.Component {
   }
 
   getOrgaImageLink = orga => {
-    if (!orga) return false
+    if (!orga) return null
     return (
-      'https://etu.utt.fr' + orga._links.find(link => link.rel === 'orga.image').uri
+      'https://etu.utt.fr' +
+      orga._links.find(link => link.rel === 'orga.image').uri
     )
   }
   render() {
@@ -185,7 +186,9 @@ class Events extends React.Component {
                   start={event.begin.date}
                   end={event.end.date}
                   image={this.getOrgaImageLink(event.orga)}
-                  onPress={() => console.log(event)}
+                  onPress={() =>
+                    this.props.navigation.navigate('EventsDetails', { event })
+                  }
                 >
                   {event.title}
                 </EventLine>
