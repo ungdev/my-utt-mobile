@@ -63,6 +63,14 @@ export const fetchOrgas = async () => {
   return res.data.data
 }
 
+export const fetchOrga = async login => {
+  const token = await getToken()
+  const res = await api.get(`public/orgas/${login}`, {
+    headers: { Authorization: `Bearer ${token}` }
+  })
+  return res.data.data
+}
+
 export const fetchUEs = async () => {
   const token = await getToken()
   const res = await api.get('ues', {

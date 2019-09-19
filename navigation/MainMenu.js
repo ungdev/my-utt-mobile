@@ -16,7 +16,7 @@ import {
   CLIENT_ID_KEY,
   CLIENT_SECRET_KEY,
   USER_KEY,
-  ORGAS_KEY,
+  ORGAS_KEY
 } from '../constants/StorageKey'
 import { fetchUser, fetchOrgas, getToken } from '../services/api'
 import { registerForExpoPushNotifications } from '../services/expoPushNotifications'
@@ -49,17 +49,20 @@ class MainMenu extends React.Component {
   }
   click = async d => {
     switch (d) {
-      case 'ue':
-        this.props.navigation.navigate('UE')
-        break
-      case 'profile':
-        this.props.navigation.navigate('Profile')
-        break
       case 'events':
         this.props.navigation.navigate('Events')
         break
       case 'logout':
         this.logout()
+        break
+      case 'orgas':
+        this.props.navigation.navigate('Assos')
+        break
+      case 'profile':
+        this.props.navigation.navigate('Profile')
+        break
+      case 'ue':
+        this.props.navigation.navigate('UE')
         break
       default:
         break
@@ -166,7 +169,8 @@ class MainMenu extends React.Component {
       },
       {
         name: 'Associations',
-        icon: 'users'
+        icon: 'users',
+        destination: 'orgas'
       },
       {
         name: 'Se déconnecter',

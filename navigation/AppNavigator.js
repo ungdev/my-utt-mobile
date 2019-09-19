@@ -1,23 +1,25 @@
 import React from 'react'
 import { createSwitchNavigator } from 'react-navigation'
 
-import MainMenu from './MainMenu'
-import LoginPage from './login/LoginPage'
-import EtuLoginPage from './login/EtuLoginPage'
-import UEBundle from '../Bundles/UEBundle/Main'
-import ProfileBundle from '../Bundles/ProfileBundle/Main'
-import EventsBundle from '../Bundles/EventsBundle/Main'
+import Main from './MainMenu'
+import Login from './login/LoginPage'
+import EtuLogin from './login/EtuLoginPage'
+import UE from '../Bundles/UEBundle/Main'
+import Profile from '../Bundles/ProfileBundle/Main'
+import Events from '../Bundles/EventsBundle/Main'
+import Assos from '../Bundles/AssosBundle/Main'
 
 const Navigator = createSwitchNavigator(
   {
     // You could add another route here for authentication.
     // Read more at https://reactnavigation.org/docs/en/auth-flow.html
-    Main: MainMenu, // menu with all buttons to select a bundle
-    Login: LoginPage,
-    EtuLogin: EtuLoginPage,
-    UE: UEBundle,
-    Profile: ProfileBundle,
-    Events: EventsBundle
+    Main, // menu with all buttons to select a bundle
+    Login,
+    EtuLogin,
+    UE,
+    Profile,
+    Events,
+    Assos
   },
   {
     initialRouteName: 'Login'
