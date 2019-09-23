@@ -4,7 +4,7 @@ import { Tooltip } from 'react-native-elements'
 import Icon from 'react-native-vector-icons/FontAwesome'
 
 const ProfileElement = props => {
-  if (props.value === null) return null
+  if (props.value === null || props.value === '') return null
   const component = (
     <View style={styles.container}>
       <Icon name={props.icon} size={50} color='#333' />

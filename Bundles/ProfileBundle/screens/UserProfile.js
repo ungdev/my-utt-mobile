@@ -15,31 +15,83 @@ import ProfileElement from '../components/ProfileElement'
 import SocialButton from '../components/SocialButton'
 import moment from 'moment'
 import ProfileUEList from '../components/ProfileUEList'
+import { fetchPublicUser } from '../../../services/api'
 
 class UserProfile extends React.Component {
-  static navigationOptions = ({ navigation }) =>
-    DefaultTopbar(navigation, 'Mon Profile')
-
-  getAddress = user => {
-    return (
-      <Text style={styles.value}>
-        {user.address}
-        {'  '}
-        {user.addressPrivacy !== 'public' && (
-          <Icon name='lock' size={20} color='#000' />
-        )}
-        {'\n' + user.postalCode}
-        {'  '}
-        {user.postalCodePrivacy !== 'public' && (
-          <Icon name='lock' size={20} color='#000' />
-        )}
-        {'\n' + user.city}
-        {'  '}
-        {user.cityPrivacy !== 'public' && (
-          <Icon name='lock' size={20} color='#000' />
-        )}
-      </Text>
+  static navigationOptions = ({ navigation }) => {
+    const user = navigation.getParam('user')
+    return DefaultTopbar(
+      navigation,
+      user ? user.fullName : 'Mon Profil',
+      user ? true : false
     )
+  }
+
+  constructor(props) {
+    super(props)
+    const user = props.navigation.getParam('user')
+    this.state = {
+      user: user ? null : props.screenProps.user
+    }
+    if (user) this.fetchUserInformations(user.login)
+  }
+
+  fetchUserInformations = async login => {
+    try {
+      const user = await fetchPublicUser(login)
+      this.setState({ user })
+    } catch (e) {
+      console.log(e.response || e)
+    }
+  }
+
+  getAddress = (user, thisuser) => {
+    if (user.address && user.postalCode && user.city) {
+      return (
+        <ProfileElement
+          type='Adresse'
+          value={
+            <Text style={styles.value}>
+              {user.address}
+              {'  '}
+              {user.addressPrivacy !== 'public' &&
+                user.studentId === thisuser.studentId && (
+                  <Icon name='lock' size={20} color='#000' />
+                )}
+              {'\n' + user.postalCode}
+              {'  '}
+              {user.postalCodePrivacy !== 'public' &&
+                user.studentId === thisuser.studentId && (
+                  <Icon name='lock' size={20} color='#000' />
+                )}
+              {'\n' + user.city}
+              {'  '}
+              {user.cityPrivacy !== 'public' &&
+                user.studentId === thisuser.studentId && (
+                  <Icon name='lock' size={20} color='#000' />
+                )}
+            </Text>
+          }
+          icon='home'
+        />
+      )
+    } else {
+      return (
+        <React.Fragment>
+          <ProfileElement
+            type='Adresse'
+            value={user.address}
+            icon='home'
+          />
+          <ProfileElement type='Ville' value={user.city} icon='building' />
+          <ProfileElement
+            type='Code postal'
+            value={user.postalCode}
+            icon='building'
+          />
+        </React.Fragment>
+      )
+    }
   }
 
   showPhonePopup = user => {
@@ -74,7 +126,8 @@ class UserProfile extends React.Component {
     )
   }
   render() {
-    const { user } = this.props.screenProps
+    let { user } = this.state
+    const thisuser = this.props.screenProps.user
     if (!user) {
       return (
         <View style={styles.spin}>
@@ -130,40 +183,51 @@ class UserProfile extends React.Component {
         />
         <ProfileElement
           type='E-mail personnel'
-          value={user.personnalMail}
+          value={user.personalMail}
           icon='envelope'
-          private={user.personnalMailPrivacy !== 'public'}
-          onPress={() => this.showMailPopup(user.fullName, user.personnalMail)}
+          private={
+            thisuser.studentId === user.studentId &&
+            user.personalMailPrivacy !== 'public'
+          }
+          onPress={() => this.showMailPopup(user.fullName, user.personalMail)}
         />
         <ProfileElement
           type='Téléphone'
           value={user.phone}
           icon='phone'
-          private={user.phonePrivacy !== 'public'}
+          private={
+            thisuser.studentId === user.studentId &&
+            user.phonePrivacy !== 'public'
+          }
           onPress={() => this.showPhonePopup(user)}
         />
-        <ProfileElement
-          type='Adresse'
-          value={this.getAddress(user)}
-          icon='home'
-        />
+        {this.getAddress(user, thisuser)}
         <ProfileElement
           type='Sexe'
           value={user.sex === 'male' ? 'Homme' : 'Femme'}
           icon='venus-mars'
-          private={user.sexPrivacy !== 'public'}
+          private={
+            thisuser.studentId === user.studentId &&
+            user.sexPrivacy !== 'public'
+          }
         />
         <ProfileElement
           type='Nationalité'
           value={user.nationality}
           icon='flag'
-          private={user.nationalityPrivacy !== 'public'}
+          private={
+            thisuser.studentId === user.studentId &&
+            user.nationalityPrivacy !== 'public'
+          }
         />
         <ProfileElement
           type='Date de naissance'
           value={moment(user.birthday.date).format('DD/MM/YYYY')}
           icon='birthday-cake'
-          private={user.birthdayPrivacy !== 'public'}
+          private={
+            thisuser.studentId === user.studentId &&
+            user.birthdayPrivacy !== 'public'
+          }
         />
         <ProfileUEList ues={user.uvs} navigation={this.props.navigation} />
         {/* TODO

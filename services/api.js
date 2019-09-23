@@ -55,6 +55,14 @@ export const fetchUser = async () => {
   return res.data.data
 }
 
+export const fetchPublicUser = async login => {
+  const token = await getToken()
+  const res = await api.get(`public/users/${login}`, {
+    headers: { Authorization: `Bearer ${token}` }
+  })
+  return res.data.data
+}
+
 export const fetchOrgas = async () => {
   const token = await getToken()
   const res = await api.get('public/listorgas', {

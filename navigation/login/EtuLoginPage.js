@@ -1,5 +1,6 @@
 import React from 'react'
-import { Modal, Text, TouchableOpacity, View, WebView } from 'react-native'
+import { Modal, Text, TouchableOpacity, View } from 'react-native'
+import { WebView } from 'react-native-webview'
 import config from '../../config'
 import Constants from 'expo-constants'
 import Icon from 'react-native-vector-icons/FontAwesome'
@@ -15,7 +16,10 @@ class EtuLoginPage extends React.Component {
 
   render() {
     let WebViewRef = null
-    if (!this.state.uri) return null
+    if (!this.state.uri) {
+      this.setState({ uri: this.uri })
+      return null
+    }
     return (
       <Modal
         animationType={'slide'}
@@ -47,7 +51,11 @@ class EtuLoginPage extends React.Component {
             source={{
               uri: this.state.uri
             }}
+            startInLoadingState={true}
+            originWhitelist={['*']}
             style={{ marginTop: 20 }}
+            javaScriptEnabled={true}
+            domStorageEnabled={true}
             onLoadStart={e => {
               if (e.nativeEvent.url.indexOf('http://etu.utt.fr/user') !== -1) {
                 this.setState({ uri: this.uri })
