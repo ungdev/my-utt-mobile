@@ -59,7 +59,7 @@ class ProfileUEList extends React.Component {
                 <TouchableOpacity
                   key={ue.slug}
                   onPress={() =>
-                    navigation.push('Details', { slug: ue.slug, code: ue.code })
+                    navigation.push('UEDetails', { slug: ue.slug, code: ue.code })
                   }
                 >
                   <Tag>{ue.code}</Tag>

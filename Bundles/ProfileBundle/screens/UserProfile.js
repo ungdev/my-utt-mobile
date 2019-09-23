@@ -222,7 +222,7 @@ class UserProfile extends React.Component {
         />
         <ProfileElement
           type='Date de naissance'
-          value={moment(user.birthday.date).format('DD/MM/YYYY')}
+          value={user.birthday ? moment(user.birthday.date).format('DD/MM/YYYY') : null}
           icon='birthday-cake'
           private={
             thisuser.studentId === user.studentId &&
