@@ -5,7 +5,8 @@ import {
   View,
   StyleSheet,
   AsyncStorage,
-  Dimensions
+  Dimensions,
+  Text
 } from 'react-native'
 import GridButton from '../components/Menu/GridButton'
 import { ScrollView } from 'react-native-gesture-handler'
@@ -15,6 +16,7 @@ import {
   ACCESS_TOKEN_EXPIRATION_KEY,
   CLIENT_ID_KEY,
   CLIENT_SECRET_KEY,
+  TUTORIAL_KEY,
   USER_KEY,
   ORGAS_KEY
 } from '../constants/StorageKey'
@@ -22,6 +24,7 @@ import { fetchUser, fetchOrgas, getToken } from '../services/api'
 import { registerForExpoPushNotifications } from '../services/expoPushNotifications'
 import DefaultTopbar from '../constants/DefaultTopbar'
 import { createStackNavigator } from 'react-navigation'
+import Popover from 'react-native-popover-view'
 
 class MainMenu extends React.Component {
   static navigationOptions = ({ navigation }) =>
@@ -31,6 +34,15 @@ class MainMenu extends React.Component {
     super(props)
     this.checkToken()
     registerForExpoPushNotifications()
+    this.launchTutorial()
+    this.state = {
+      tutorial: ''
+    }
+  }
+
+  launchTutorial = async () => {
+    const tutorialDone = await AsyncStorage.getItem(TUTORIAL_KEY)
+    if (tutorialDone !== 'done') this.setState({ tutorial: 'tutorial' })
   }
 
   checkToken = async () => {
@@ -124,6 +136,29 @@ class MainMenu extends React.Component {
     }
   }
 
+  nextTutorial = async () => {
+    const tutorials = [
+      'tutorial',
+      'profile',
+      'ue',
+      'events',
+      'orgas',
+      'logout',
+      'dev',
+      'end'
+    ]
+    const index = tutorials.findIndex(tuto => this.state.tutorial === tuto)
+    if (index === -1) return
+    if (index + 1 === tutorials.length) {
+      this.setState({ tutorial: '' })
+      await AsyncStorage.setItem(TUTORIAL_KEY, 'done')
+      return
+    }
+    let tutorial = tutorials[index + 1]
+    this.setState({ tutorial: '' })
+    setTimeout(() => this.setState({ tutorial }), 500)
+  }
+
   render() {
     const { user } = this.props.screenProps
     if (!user) {
@@ -138,23 +173,32 @@ class MainMenu extends React.Component {
       {
         name: 'Mon profil',
         icon: 'user',
-        destination: 'profile'
+        destination: 'profile',
+        tutorialTitle: 'Tu retrouveras ici ton profil !',
+        tutorialContent:
+          'Toutes tes informations y seront, tel que tu les auras rentrées sur le site étudiant'
       },
       {
         name: 'Guide des UEs',
         icon: 'book',
-        destination: 'ue'
+        destination: 'ue',
+        tutorialTitle: 'Voici le guide des UEs !',
+        tutorialContent:
+          "MATH01, LO02,... Elles t'y attendent toutes ! Tu y retrouveras tes UEs mais tu peux aussi chercher les prochaines que tu souhaites faire"
       },
-      {
+      /* {
         name: 'Emploi du temps',
         icon: 'table'
-      },
+      },*/
       {
         name: 'Événements',
         icon: 'calendar',
-        destination: 'events'
+        destination: 'events',
+        tutorialTitle: 'Cet onglet te permet de voir les événements étudiants',
+        tutorialContent:
+          "Tu n'auras plus aucune excuse pour rater une soirée ;)"
       },
-      {
+      /* {
         name: 'Chat',
         icon: 'comments'
       },
@@ -166,16 +210,21 @@ class MainMenu extends React.Component {
         name: 'Trombinoscopes',
         icon: 'address-book',
         destination: 'trombi'
-      },
+      },*/
       {
         name: 'Associations',
         icon: 'users',
-        destination: 'orgas'
+        destination: 'orgas',
+        tutorialTitle: 'Le cœur de la vie étudiante',
+        tutorialContent:
+          "Tu souhaites découvrir les associations de l'UTT ? Elles sont toutes ici !"
       },
       {
         name: 'Se déconnecter',
         icon: 'sign-out',
-        destination: 'logout'
+        destination: 'logout',
+        tutorialTitle: 'Si jamais tu souhaites te déconnecter...',
+        tutorialContent: "FAIS PAS ÇA STP :'("
       }
     ]
 
@@ -202,7 +251,11 @@ class MainMenu extends React.Component {
                 />
               )
             }
+            tutorialTitle={section.tutorialTitle}
+            tutorialContent={section.tutorialContent}
             onPress={() => this.click(section.destination)}
+            tutorialVisible={this.state.tutorial === section.destination}
+            closeTutorial={this.nextTutorial}
           />
         )
       })
@@ -221,6 +274,43 @@ class MainMenu extends React.Component {
     return (
       <View style={styles.container}>
         <ScrollView style={styles.grid}>{grid}</ScrollView>
+        <Popover
+          isVisible={this.state.tutorial === 'tutorial'}
+          onRequestClose={this.nextTutorial}
+        >
+          <Text style={styles.popupTitle}>
+            Bienvenu sur ton application MyUTT !
+          </Text>
+          <Text style={styles.popup}>
+            L'UNG est fière de te présenter son nouveau jouet. Ce petit tutoriel
+            va t'apprendre les bases de l'application !
+          </Text>
+        </Popover>
+        <Popover
+          isVisible={this.state.tutorial === 'dev'}
+          onRequestClose={this.nextTutorial}
+        >
+          <Text style={styles.popupTitle}>Tu souhaites participer ?</Text>
+          <Text style={styles.popup}>
+            Si tu souhaites aider au développement, en faisant des suggestions
+            ou en développant, n'hésite pas à nous contacter par mail :
+            <Text style={{ color: '#4098ff' }}>ung@utt.fr</Text>, nous sommes
+            ouverts aux suggestions ! Et si tu ne sais pas développer, c'est pas
+            grave ! Ça s'apprend ;)
+          </Text>
+        </Popover>
+        <Popover
+          isVisible={this.state.tutorial === 'end'}
+          onRequestClose={this.nextTutorial}
+        >
+          <Text style={styles.popupTitle}>Voilà c'est tout</Text>
+          <Text style={styles.popup}>
+            Évidemment, c'est assez peu pour le moment, mais nous continuons de
+            bosser dur pour ajouter toutes les fonctionnalités du site étudiant
+            ici, et plus encore !
+          </Text>
+          <Text style={styles.popupEnd}>L'équipe UNG - UTT Net Group</Text>
+        </Popover>
       </View>
     )
   }
@@ -258,6 +348,20 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center'
+  },
+  popupTitle: {
+    fontSize: 20,
+    padding: 10,
+    textAlign: 'center'
+  },
+  popupEnd: {
+    fontSize: 15,
+    padding: 10,
+    textAlign: 'right'
+  },
+  popup: {
+    textAlign: 'justify',
+    padding: 10
   }
 })
 
