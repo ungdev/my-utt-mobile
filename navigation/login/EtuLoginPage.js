@@ -63,7 +63,7 @@ class EtuLoginPage extends React.Component {
               if (e.nativeEvent.url.indexOf('http://etu.utt.fr/') !== -1) {
                 this.setState({ uri: this.uri })
               }
-              if (e.nativeEvent.url.indexOf('etuutt.invalid') !== -1) {
+              if (e.nativeEvent.url.indexOf('https://etu.utt.fr/redirect') !== -1) {
                 if (
                   e.nativeEvent.url.indexOf('authentification_canceled') === -1
                 ) {

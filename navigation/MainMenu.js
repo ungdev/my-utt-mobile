@@ -34,7 +34,6 @@ class MainMenu extends React.Component {
     super(props)
     this.checkToken()
     registerForExpoPushNotifications()
-    this.launchTutorial()
     this.state = {
       tutorial: ''
     }
@@ -51,6 +50,7 @@ class MainMenu extends React.Component {
       if (token) {
         this.getUserFromMemory()
         this.updateUser()
+        this.launchTutorial()
       } else {
         this.props.navigation.navigate('Login')
       }
@@ -156,7 +156,7 @@ class MainMenu extends React.Component {
     }
     let tutorial = tutorials[index + 1]
     this.setState({ tutorial: '' })
-    setTimeout(() => this.setState({ tutorial }), 500)
+    setTimeout(() => this.setState({ tutorial }), 1000)
   }
 
   render() {
