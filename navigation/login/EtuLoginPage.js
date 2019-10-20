@@ -16,6 +16,7 @@ class EtuLoginPage extends React.Component {
 
   render() {
     let WebViewRef = null
+    console.log(this.state.uri, this.uri)
     if (!this.state.uri) {
       this.setState({ uri: this.uri })
       return null

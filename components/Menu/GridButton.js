@@ -40,16 +40,17 @@ class GridButton extends React.Component {
           <Text style={styles.title}>{this.props.title}</Text>
         </TouchableOpacity>
 
-        {this.props.tutorialTitle !== null && (
-          <Popover
-            isVisible={this.props.tutorialVisible}
-            fromRect={this.state.rect}
-            onRequestClose={() => this.props.closeTutorial()}
-          >
-            <Text style={styles.popupTitle}>{this.props.tutorialTitle}</Text>
-            <Text style={styles.popup}>{this.props.tutorialContent}</Text>
-          </Popover>
-        )}
+        {this.props.tutorialVisible === true &&
+          this.props.tutorialTitle !== null && (
+            <Popover
+              isVisible={this.props.tutorialVisible}
+              fromRect={this.state.rect}
+              onRequestClose={() => this.props.closeTutorial()}
+            >
+              <Text style={styles.popupTitle}>{this.props.tutorialTitle}</Text>
+              <Text style={styles.popup}>{this.props.tutorialContent}</Text>
+            </Popover>
+          )}
       </React.Fragment>
     )
   }
