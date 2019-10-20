@@ -67,13 +67,22 @@ class UECommentaries extends React.Component {
           {comments.map((comment, index) => {
             const date = moment(comment.createdAt.date).format('DD/MM/YYYY')
             return (
-            <Card key={index} style={styles.card}>
-              <Card.Header title={`De : ${comment.fullName}`} extra={`Le ${date}`} /> 
-              <Card.Body style={styles.body}>
-                <HTML html={comment.body} />
-              </Card.Body>
-            </Card>
-          )})}
+              <Card key={index} style={styles.card}>
+                <Card.Header
+                  title={`De : ${comment.fullName}`}
+                  extra={`Le ${date}`}
+                />
+                <Card.Body style={styles.body}>
+                  <HTML html={comment.body} />
+                </Card.Body>
+              </Card>
+            )
+          })}
+          {comments.length === 0 && (
+            <View style={styles.empty}>
+              <Text>Aucun commentaire pour cette UE</Text>
+            </View>
+          )}
         </ScrollView>
       </View>
     )
@@ -87,7 +96,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center'
   },
-  card:{
+  card: {
     marginBottom: 10,
     marginTop: 10
   },
@@ -99,7 +108,12 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center'
   },
-  back: { flexDirection: 'row', alignItems: 'center' }
+  back: { flexDirection: 'row', alignItems: 'center' },
+  empty: {
+    marginTop: 20,
+    backgroundColor: 'white',
+    padding: 15
+  }
 })
 
 export default UECommentaries
