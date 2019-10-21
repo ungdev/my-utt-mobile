@@ -87,6 +87,14 @@ export const fetchUEs = async () => {
   return res.data.ues
 }
 
+export const fetchCourses = async login => {
+  const token = await getToken()
+  const res = await api.get(`public/users/${login}/courses`, {
+    headers: { Authorization: `Bearer ${token}` }
+  })
+  return res.data.courses
+}
+
 export const fetchUEDetails = async slug => {
   const token = await getToken()
   const res = await api.get(`ues/${slug}`, {

@@ -8,6 +8,7 @@ import UE from '../Bundles/UEBundle/Main'
 import Profile from '../Bundles/ProfileBundle/Main'
 import Events from '../Bundles/EventsBundle/Main'
 import Assos from '../Bundles/AssosBundle/Main'
+import Timetable from '../Bundles/TimetableBundle/Main'
 
 const Navigator = createSwitchNavigator(
   {
@@ -19,7 +20,8 @@ const Navigator = createSwitchNavigator(
     UE,
     Profile,
     Events,
-    Assos
+    Assos,
+    Timetable
   },
   {
     initialRouteName: 'Login'

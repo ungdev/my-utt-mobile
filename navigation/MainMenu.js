@@ -76,6 +76,9 @@ class MainMenu extends React.Component {
       case 'ue':
         this.props.navigation.navigate('UE')
         break
+      case 'edt':
+        this.props.navigation.navigate('Timetable')
+        break
       default:
         break
     }
@@ -141,6 +144,7 @@ class MainMenu extends React.Component {
       'tutorial',
       'profile',
       'ue',
+      'edt',
       'events',
       'orgas',
       'logout',
@@ -186,10 +190,14 @@ class MainMenu extends React.Component {
         tutorialContent:
           "MATH01, LO02,... Elles t'y attendent toutes ! Tu y retrouveras tes UEs mais tu peux aussi chercher les prochaines que tu souhaites faire"
       },
-      /* {
+      {
         name: 'Emploi du temps',
-        icon: 'table'
-      },*/
+        icon: 'table',
+        destination: 'edt',
+        tutorialTitle: 'Tu retrouveras ici ton emploi du temps',
+        tutorialContent:
+          'Désolé mais l\'excuse de "Mince, je ne savais pas qu\'il y avait cours" ne tiendra plus.'
+      },
       {
         name: 'Événements',
         icon: 'calendar',

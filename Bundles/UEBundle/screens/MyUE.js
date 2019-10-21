@@ -32,7 +32,6 @@ class MyUEScreen extends React.Component {
       await AsyncStorage.setItem(UES_KEY, JSON.stringify(ues))
     } catch (e) {
       console.log(e)
-      this.props.navigation.navigate('Login')
     }
   }
   render() {
