@@ -65,10 +65,10 @@ export const fetchPublicUser = async login => {
 
 export const fetchOrgas = async () => {
   const token = await getToken()
-  const res = await api.get('public/listorgas', {
+  const res = await api.get('public/listorgas?noElu=true', {
     headers: { Authorization: `Bearer ${token}` }
   })
-  return res.data.data
+  return res.data.data.filter(orga => !orga.name.includes('Elus') && !orga.name.includes('Élus'))
 }
 
 export const fetchOrga = async login => {
@@ -125,6 +125,7 @@ export const setExpoPushToken = async pushToken => {
 
 export const fetchEvents = async (after, before) => {
   const token = await getToken()
+  console.log(token)
   const res = await api.get(`events?after=${after}&before=${before}`, {
     headers: { Authorization: `Bearer ${token}` }
   })

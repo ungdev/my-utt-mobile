@@ -70,6 +70,15 @@ class MainMenu extends React.Component {
       case 'orgas':
         this.props.navigation.navigate('Assos')
         break
+      case 'ung':
+        const asso = this.props.screenProps.orgas.find(
+          orga => orga.login === 'ung'
+        )
+        this.props.navigation.navigate('AssosDetails', { asso })
+        break
+      case 'about':
+        this.props.navigation.navigate('About')
+        break
       case 'profile':
         this.props.navigation.navigate('Profile')
         break
@@ -147,6 +156,8 @@ class MainMenu extends React.Component {
       'edt',
       'events',
       'orgas',
+      'ung',
+      'about',
       'logout',
       'dev',
       'end'
@@ -164,8 +175,8 @@ class MainMenu extends React.Component {
   }
 
   render() {
-    const { user } = this.props.screenProps
-    if (!user) {
+    const { user, orgas } = this.props.screenProps
+    if (!user || !orgas) {
       return (
         <View style={styles.spin}>
           <ActivityIndicator size='large' color='#4098ff' />
@@ -226,6 +237,22 @@ class MainMenu extends React.Component {
         tutorialTitle: 'Le cœur de la vie étudiante',
         tutorialContent:
           "Tu souhaites découvrir les associations de l'UTT ? Elles sont toutes ici !"
+      },
+      {
+        name: '',
+        image: require('../assets/images/ung.png'),
+        destination: 'ung',
+        tutorialTitle: 'Ton humble serviteur',
+        tutorialContent:
+          "L'UTT Net Group est l'association d'informatique de l'UTT. Tout ce qui touche à l'informatique au niveau associatif, c'est nous ! C'est notamment nous qui développons cette application et le site étudiant ;)"
+      },
+      {
+        name: 'À propos',
+        icon: 'question',
+        destination: 'about',
+        tutorialTitle: 'Tu souhaites en savoir plus ?',
+        tutorialContent:
+          'Si tu cherches des informations supplémentaires sur cette application, regarde par ici !'
       },
       {
         name: 'Se déconnecter',

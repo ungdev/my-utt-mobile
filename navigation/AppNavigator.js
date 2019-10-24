@@ -9,6 +9,7 @@ import Profile from '../Bundles/ProfileBundle/Main'
 import Events from '../Bundles/EventsBundle/Main'
 import Assos from '../Bundles/AssosBundle/Main'
 import Timetable from '../Bundles/TimetableBundle/Main'
+import About from '../Bundles/AboutBundle/Main'
 
 const Navigator = createSwitchNavigator(
   {
@@ -21,6 +22,7 @@ const Navigator = createSwitchNavigator(
     Profile,
     Events,
     Assos,
+    About,
     Timetable
   },
   {
