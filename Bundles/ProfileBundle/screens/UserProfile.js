@@ -78,11 +78,7 @@ class UserProfile extends React.Component {
     } else {
       return (
         <React.Fragment>
-          <ProfileElement
-            type='Adresse'
-            value={user.address}
-            icon='home'
-          />
+          <ProfileElement type='Adresse' value={user.address} icon='home' />
           <ProfileElement type='Ville' value={user.city} icon='building' />
           <ProfileElement
             type='Code postal'
@@ -135,8 +131,16 @@ class UserProfile extends React.Component {
         </View>
       )
     }
+    console.log(user)
     const image = user._links.find(link => link.rel === 'user.image')
     const image_uri = 'https://etu.utt.fr' + image.uri // TODO replace by config
+
+    const displayUEList = () => {
+      if (!user.uvs || user.uvs.length === 0) return false
+      if (user.uvs.length === 1 && user.uvs[0] === '') return false
+      return true
+    }
+
     return (
       <ScrollView contentContainerStyle={styles.container}>
         <Avatar
@@ -222,14 +226,20 @@ class UserProfile extends React.Component {
         />
         <ProfileElement
           type='Date de naissance'
-          value={user.birthday ? moment(user.birthday.date).format('DD/MM/YYYY') : null}
+          value={
+            user.birthday
+              ? moment(user.birthday.date).format('DD/MM/YYYY')
+              : null
+          }
           icon='birthday-cake'
           private={
             thisuser.studentId === user.studentId &&
             user.birthdayPrivacy !== 'public'
           }
         />
-        <ProfileUEList ues={user.uvs} navigation={this.props.navigation} />
+        {displayUEList() && (
+          <ProfileUEList ues={user.uvs} navigation={this.props.navigation} />
+        )}
         {/* TODO
           
           <ProfileElement
