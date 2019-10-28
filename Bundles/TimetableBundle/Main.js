@@ -44,8 +44,7 @@ class TimetableBundle extends React.Component {
   }
   getCoursesFromServer = async () => {
     try {
-      //const courses = await fetchCourses(this.props.screenProps.user.login)
-      const courses = await fetchCourses('chidiacc')
+      const courses = await fetchCourses(this.props.screenProps.user.login)
       this.setState({ courses })
       await AsyncStorage.setItem(COURSES_KEY, JSON.stringify(courses))
     } catch (e) {
