@@ -52,8 +52,8 @@ LocaleConfig.locales['fr'] = {
 LocaleConfig.defaultLocale = 'fr'
 
 class Events extends React.Component {
-  static navigationOptions = ({ navigation }) =>
-    DefaultTopbar(navigation, 'Événements')
+  static navigationOptions = () =>
+    DefaultTopbar('Événements')
 
   constructor(props) {
     super(props)

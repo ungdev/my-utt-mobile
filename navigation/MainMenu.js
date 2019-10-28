@@ -22,13 +22,11 @@ import {
 } from '../constants/StorageKey'
 import { fetchUser, fetchOrgas, getToken } from '../services/api'
 import { registerForExpoPushNotifications } from '../services/expoPushNotifications'
-import DefaultTopbar from '../constants/DefaultTopbar'
 import { createStackNavigator } from 'react-navigation'
 import Popover from 'react-native-popover-view'
 
 class MainMenu extends React.Component {
-  static navigationOptions = ({ navigation }) =>
-    DefaultTopbar(navigation, 'My UTT', null)
+  static navigationOptions = () => ({ header: null })
 
   constructor(props) {
     super(props)

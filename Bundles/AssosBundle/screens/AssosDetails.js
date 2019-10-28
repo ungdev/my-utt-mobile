@@ -23,7 +23,7 @@ import HTML from 'react-native-render-html'
 class AssosDetails extends React.Component {
   static navigationOptions = ({ navigation }) => {
     const asso = navigation.getParam('asso')
-    return DefaultTopbar(navigation, asso.name, true)
+    return DefaultTopbar(asso.name)
   }
 
   constructor(props) {

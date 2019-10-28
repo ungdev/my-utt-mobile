@@ -14,8 +14,8 @@ import moment from 'moment'
 import HTML from 'react-native-render-html'
 
 class EventsDetails extends React.Component {
-  static navigationOptions = ({ navigation }) =>
-    DefaultTopbar(navigation, 'Événement', true)
+  static navigationOptions = () =>
+    DefaultTopbar('Événement')
 
   constructor(props) {
     super(props)
@@ -24,7 +24,6 @@ class EventsDetails extends React.Component {
     }
     this.getEventDetails()
   }
-  componentDidMount() {}
 
   getEventDetails = async () => {
     try {

@@ -21,7 +21,6 @@ class UserProfile extends React.Component {
   static navigationOptions = ({ navigation }) => {
     const user = navigation.getParam('user')
     return DefaultTopbar(
-      navigation,
       user ? user.fullName : 'Mon Profil',
       user ? true : false
     )
@@ -131,7 +130,6 @@ class UserProfile extends React.Component {
         </View>
       )
     }
-    console.log(user)
     const image = user._links.find(link => link.rel === 'user.image')
     const image_uri = 'https://etu.utt.fr' + image.uri // TODO replace by config
 

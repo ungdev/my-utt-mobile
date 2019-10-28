@@ -13,6 +13,7 @@ import { Button } from '@ant-design/react-native'
 import { fetchUEDetails } from '../../../services/api'
 import { normalize } from '../../../services/font'
 import Tag from '../../../components/Tag'
+import DefaultTopbar from '../../../constants/DefaultTopbar'
 
 class UEDetails extends React.Component {
   constructor(props) {
@@ -23,22 +24,8 @@ class UEDetails extends React.Component {
     }
   }
   static navigationOptions = ({ navigation }) => {
-    return {
-      title: `${navigation.getParam('code', '...')}`,
-      headerStyle: {
-        backgroundColor: '#4098ff'
-      },
-      headerTitleStyle: {
-        color: 'white'
-      },
-      headerLeft: Platform.OS === 'ios' && (
-        <TouchableOpacity style={styles.back} onPress={() => navigation.pop()}>
-          <Text style={{ marginLeft: 8, color: 'white', fontSize: 20 }}>
-            Retour
-          </Text>
-        </TouchableOpacity>
-      )
-    }
+    let title = `${navigation.getParam('code', '...')}`
+    return DefaultTopbar(title)
   }
 
   getDetails = async slug => {
@@ -74,7 +61,6 @@ class UEDetails extends React.Component {
           <ActivityIndicator size='large' color='#4098ff' />
         </View>
       )
-    console.log(ue)
     return (
       <View style={styles.container}>
         <ScrollView style={styles.subcontainer}>

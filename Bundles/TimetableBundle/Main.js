@@ -1,21 +1,16 @@
 import React from 'react'
-import { createStackNavigator } from 'react-navigation'
 import { TabView, TabBar } from 'react-native-tab-view'
-import { AsyncStorage, BackHandler, Dimensions, Text } from 'react-native'
+import { AsyncStorage, Dimensions, Text } from 'react-native'
 
 import { fetchCourses } from '../../services/api'
 import { COURSES_KEY } from '../../constants/StorageKey'
 import Timetable from './screens/Timetable'
 import TimetableLoading from './screens/TimetableLoading'
+import DefaultTopbar from '../../constants/DefaultTopbar'
 
-const TimetableStack = createStackNavigator({
-  Timetable
-})
-const TimetableLoadingStack = createStackNavigator({
-  TimetableLoading
-})
 
 class TimetableBundle extends React.Component {
+  static navigationOptions = () => DefaultTopbar('Emploi du temps')
   constructor(props) {
     super(props)
     this.getCoursesFromServer()
@@ -51,36 +46,24 @@ class TimetableBundle extends React.Component {
       console.log(e)
     }
   }
-  componentDidMount() {
-    this.backHandler = BackHandler.addEventListener('hardwareBackPress', () => {
-      this.props.navigation.navigate('Main')
-      return true
-    })
-  }
-  componentWillUnmount() {
-    this.backHandler.remove()
-  }
-
-  goTo = (destination, param = null) => this.props.navigation.navigate(destination, param)
-
   render() {
     const { courses } = this.state
     if (courses === null)
       // TODO add fetching because if user has no course it would spin forever
-      return <TimetableLoadingStack />
+      return <TimetableLoading />
     return (
       <TabView
         screenProps={this.props.screenProps}
         navigationState={this.state}
         renderScene={({ route }) => (
-          <TimetableStack
+          <Timetable
             screenProps={{
               ...this.props.screenProps,
-              goTo: this.goTo,
               key: route.key,
               title: route.title,
               courses: courses.filter(course => course.day === route.key)
             }}
+            navigation={this.props.navigation}
           />
         )}
         renderTabBar={props => (

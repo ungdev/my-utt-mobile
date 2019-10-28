@@ -1,6 +1,5 @@
 import React from 'react'
 import {
-  BackHandler,
   Linking,
   ScrollView,
   StyleSheet,
@@ -9,18 +8,8 @@ import {
 import DefaultTopbar from '../../../constants/DefaultTopbar'
 
 class About extends React.Component {
-  static navigationOptions = ({ navigation }) =>
-    DefaultTopbar(navigation, 'À propos')
-
-  componentDidMount() {
-    this.backHandler = BackHandler.addEventListener('hardwareBackPress', () => {
-      this.props.navigation.navigate('Main')
-      return true
-    })
-  }
-  componentWillUnmount() {
-    this.backHandler.remove()
-  }
+  static navigationOptions = () =>
+    DefaultTopbar('À propos')
 
   render() {
     return (

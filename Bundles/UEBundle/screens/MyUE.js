@@ -14,8 +14,7 @@ class MyUEScreen extends React.Component {
       ues: []
     }
   }
-  static navigationOptions = ({ screenProps }) =>
-    DefaultTopbar({ navigate: screenProps.goTo }, 'Mes UEs')
+  static navigationOptions = () => DefaultTopbar('Mes UEs')
 
   getUEsFromMemory = async () => {
     try {
@@ -37,13 +36,13 @@ class MyUEScreen extends React.Component {
   render() {
     const { user } = this.props.screenProps
     let { ues } = this.state
-    const { navigate } = this.props.navigation
     if (ues.length === 0 || !user)
       return (
         <View style={styles.spin}>
           <ActivityIndicator size='large' color='#4098ff' />
         </View>
       )
+    const { navigate } = this.props.navigation
 
     const myues = user.uvs.map(uv => {
       const found = ues.find(u => u.code === uv)
