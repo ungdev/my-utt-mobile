@@ -5,6 +5,7 @@ import {
   ScrollView,
   StyleSheet,
   Text,
+  TouchableOpacity,
   View
 } from 'react-native'
 import DefaultTopbar from '../../../constants/DefaultTopbar'
@@ -14,8 +15,7 @@ import moment from 'moment'
 import HTML from 'react-native-render-html'
 
 class EventsDetails extends React.Component {
-  static navigationOptions = () =>
-    DefaultTopbar('Événement')
+  static navigationOptions = () => DefaultTopbar('Événement')
 
   constructor(props) {
     super(props)
@@ -55,16 +55,18 @@ class EventsDetails extends React.Component {
         </View>
       )
     }
-
+    const asso = this.props.screenProps.orgas.find(orga => orga.login === event.orga)
     return (
       <ScrollView contentContainerStyle={styles.container}>
         <Text style={styles.title}>{event.title}</Text>
-        <Image
-          source={{
-            uri: this.getOrgaImageLink(event.orga)
-          }}
-          style={{ width: 150, height: 150 }}
-        />
+        <TouchableOpacity onPress={() => this.props.navigation.navigate('AssosDetails', { asso })}>
+          <Image
+            source={{
+              uri: this.getOrgaImageLink(event.orga)
+            }}
+            style={{ width: 150, height: 150 }}
+          />
+        </TouchableOpacity>
         <Text style={styles.subtitle}>Catégories : {event.category}</Text>
 
         <Text style={styles.subtitle}>Début le : </Text>
