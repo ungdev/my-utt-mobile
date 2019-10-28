@@ -206,15 +206,17 @@ class UserProfile extends React.Component {
           onPress={() => this.showPhonePopup(user)}
         />
         {this.getAddress(user, thisuser)}
-        <ProfileElement
-          type='Sexe'
-          value={user.sex === 'male' ? 'Homme' : 'Femme'}
-          icon='venus-mars'
-          private={
-            thisuser.studentId === user.studentId &&
-            user.sexPrivacy !== 'public'
-          }
-        />
+        {user.sex !== null && (
+          <ProfileElement
+            type='Sexe'
+            value={user.sex === 'male' ? 'Homme' : 'Femme'}
+            icon='venus-mars'
+            private={
+              thisuser.studentId === user.studentId &&
+              user.sexPrivacy !== 'public'
+            }
+          />
+        )}
         <ProfileElement
           type='Nationalité'
           value={user.nationality}
