@@ -139,6 +139,13 @@ class UserProfile extends React.Component {
       return true
     }
 
+    const getUserBranch = user => {
+      let r = user.branch
+      if (user.level) r += ' ' + user.level
+      if (user.speciality) r += ` (${user.speciality})`
+      return r
+    }
+
     return (
       <ScrollView contentContainerStyle={styles.container}>
         <Avatar
@@ -169,12 +176,7 @@ class UserProfile extends React.Component {
         />
         <ProfileElement
           type='Branche'
-          value={
-            user.branch +
-            ' ' +
-            user.level +
-            (user.speciality ? ' ' + user.speciality : '')
-          }
+          value={getUserBranch(user)}
           icon='graduation-cap'
         />
         <ProfileElement

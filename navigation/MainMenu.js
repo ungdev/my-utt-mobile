@@ -39,7 +39,10 @@ class MainMenu extends React.Component {
 
   launchTutorial = async () => {
     const tutorialDone = await AsyncStorage.getItem(TUTORIAL_KEY)
-    if (tutorialDone !== 'done') this.setState({ tutorial: 'tutorial' })
+    if (tutorialDone !== 'done') {
+      this.setState({ tutorial: 'tutorial' })
+      await AsyncStorage.setItem(TUTORIAL_KEY, 'done')
+    }
   }
 
   checkToken = async () => {
@@ -164,7 +167,6 @@ class MainMenu extends React.Component {
     if (index === -1) return
     if (index + 1 === tutorials.length) {
       this.setState({ tutorial: '' })
-      await AsyncStorage.setItem(TUTORIAL_KEY, 'done')
       return
     }
     let tutorial = tutorials[index + 1]
@@ -327,7 +329,7 @@ class MainMenu extends React.Component {
           <Text style={styles.popup}>
             Si tu souhaites aider au développement, en faisant des suggestions
             ou en développant, n'hésite pas à nous contacter par mail :
-            <Text style={{ color: '#4098ff' }}>ung@utt.fr</Text>, nous sommes
+            <Text style={{ color: '#4098ff' }}> ung@utt.fr</Text>, nous sommes
             ouverts aux suggestions ! Et si tu ne sais pas développer, c'est pas
             grave ! Ça s'apprend ;)
           </Text>

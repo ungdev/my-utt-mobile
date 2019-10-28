@@ -85,7 +85,7 @@ class AssosDetails extends React.Component {
   showPhonePopup = asso => {
     Alert.alert(
       'Voulez vous appeler ou envoyer un message ?',
-      `${asso.name} ${asso.phone}`,
+      `${asso.name} - ${asso.phone}`,
       [
         {
           text: 'Appeler',
@@ -103,7 +103,7 @@ class AssosDetails extends React.Component {
   showMailPopup = (name, mail) => {
     Alert.alert(
       'Voulez vous envoyer un mail à cette association ?',
-      `${name} ${mail}`,
+      `${name} - ${mail}`,
       [
         {
           text: 'Ok',
@@ -163,7 +163,7 @@ class AssosDetails extends React.Component {
             type='E-mail'
             value={asso.mail}
             icon='envelope'
-            onPress={() => this.showMailPopup(asso.fullName, asso.mail)}
+            onPress={() => this.showMailPopup(asso.name, asso.mail)}
           />
           <ProfileElement
             type='Site web'
