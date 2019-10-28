@@ -133,6 +133,11 @@ class AssosDetails extends React.Component {
       const groupId = member.group.id
       if (!groups.find(group => group.id === groupId)) groups.push(member.group)
     })
+    groups = groups.sort((a, b) => {
+      if (a.position > b.position) return 1
+      if (a.position < b.position) return -1
+      return 0
+    })
     return (
       <View style={styles.container}>
         <ScrollView contentContainerStyle={styles.subcontainer}>
@@ -180,6 +185,11 @@ class AssosDetails extends React.Component {
             <AntList renderHeader={group.name} key={group.id}>
               {members
                 .filter(member => member.group.id === group.id)
+                .sort((a, b) => {
+                  if (a._embed.user.fullName > b._embed.user.fullName) return 1
+                  if (a._embed.user.fullName < b._embed.user.fullName) return -1
+                  return 0
+                })
                 .map(member => (
                   <AntList.Item
                     arrow='horizontal'
