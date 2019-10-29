@@ -2,7 +2,6 @@ import React from 'react'
 import { Text, View } from 'react-native'
 const CELL_SIZE = 30
 const ScheduleItem = props => {
-  console.log(props)
   return (
     <View
       style={{

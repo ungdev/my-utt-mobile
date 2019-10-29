@@ -12,6 +12,7 @@ import { fetchUECommentaires } from '../../../services/api'
 import { Card } from '@ant-design/react-native'
 import HTML from 'react-native-render-html'
 import moment from 'moment'
+import DefaultTopbar from '../../../constants/DefaultTopbar'
 
 class UECommentaries extends React.Component {
   constructor(props) {
@@ -23,22 +24,7 @@ class UECommentaries extends React.Component {
   }
   static navigationOptions = ({ navigation }) => {
     let title = `${navigation.getParam('code', '...')} - Commentaires`
-    return {
-      title,
-      headerStyle: {
-        backgroundColor: '#4098ff'
-      },
-      headerTitleStyle: {
-        color: 'white'
-      },
-      headerLeft: Platform.OS === 'ios' && (
-        <TouchableOpacity style={styles.back} onPress={() => navigation.pop()}>
-          <Text style={{ marginLeft: 8, color: 'white', fontSize: 20 }}>
-            Retour
-          </Text>
-        </TouchableOpacity>
-      )
-    }
+    return DefaultTopbar(title)
   }
 
   getCommentaires = async slug => {

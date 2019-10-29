@@ -6,8 +6,8 @@ import ScheduleItems from '../components/ScheduleItems'
 import { TouchableHighlight } from 'react-native-gesture-handler'
 
 class Timetable extends React.Component {
-  static navigationOptions = ({ screenProps }) =>
-    DefaultTopbar({ navigate: screenProps.goTo }, 'Emploi du temps')
+  static navigationOptions = () =>
+    DefaultTopbar('Emploi du temps')
 
   render() {
     const { user } = this.props.screenProps

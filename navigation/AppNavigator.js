@@ -1,27 +1,44 @@
 import React from 'react'
-import { createSwitchNavigator } from 'react-navigation'
+import { createSwitchNavigator, createStackNavigator } from 'react-navigation'
 
 import Main from './MainMenu'
 import Login from './login/LoginPage'
 import EtuLogin from './login/EtuLoginPage'
 import UE from '../Bundles/UEBundle/Main'
-import Profile from '../Bundles/ProfileBundle/Main'
-import Events from '../Bundles/EventsBundle/Main'
-import Assos from '../Bundles/AssosBundle/Main'
+import UECommentaries from '../Bundles/UEBundle/screens/UECommentaries'
+import UEDetails from '../Bundles/UEBundle/screens/UEDetails'
+import Profile from '../Bundles/ProfileBundle/screens/Profile'
+import Events from '../Bundles/EventsBundle/screens/Events'
+import EventsDetails from '../Bundles/EventsBundle/screens/EventsDetails'
+import Assos from '../Bundles/AssosBundle/screens/Assos'
+import AssosDetails from '../Bundles/AssosBundle/screens/AssosDetails'
 import Timetable from '../Bundles/TimetableBundle/Main'
+import About from '../Bundles/AboutBundle/screens/About'
+import DefaultTopbar from '../constants/DefaultTopbar'
 
+const MainApp = createStackNavigator(
+  {
+    Main, // menu with all buttons to select a bundle
+    About,
+    Assos,
+    AssosDetails,
+    Events,
+    EventsDetails,
+    Profile,
+    Timetable,
+    UE,
+    UECommentaries,
+    UEDetails
+  },
+  {
+    navigationOptions: () => DefaultTopbar('My UTT')
+  }
+)
 const Navigator = createSwitchNavigator(
   {
-    // You could add another route here for authentication.
-    // Read more at https://reactnavigation.org/docs/en/auth-flow.html
-    Main, // menu with all buttons to select a bundle
+    MainApp,
     Login,
-    EtuLogin,
-    UE,
-    Profile,
-    Events,
-    Assos,
-    Timetable
+    EtuLogin
   },
   {
     initialRouteName: 'Login'
@@ -37,6 +54,12 @@ class AppNavigator extends React.Component {
     }
   }
 
+  static navigationOptions = () => ({
+    headerMode: 'none',
+    navigationOptions: {
+      headerVisible: false
+    }
+  })
   setUser = user => this.setState({ user })
   setOrgas = orgas => this.setState({ orgas })
 

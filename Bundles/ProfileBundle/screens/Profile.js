@@ -21,7 +21,6 @@ class UserProfile extends React.Component {
   static navigationOptions = ({ navigation }) => {
     const user = navigation.getParam('user')
     return DefaultTopbar(
-      navigation,
       user ? user.fullName : 'Mon Profil',
       user ? true : false
     )
@@ -78,11 +77,7 @@ class UserProfile extends React.Component {
     } else {
       return (
         <React.Fragment>
-          <ProfileElement
-            type='Adresse'
-            value={user.address}
-            icon='home'
-          />
+          <ProfileElement type='Adresse' value={user.address} icon='home' />
           <ProfileElement type='Ville' value={user.city} icon='building' />
           <ProfileElement
             type='Code postal'
@@ -137,6 +132,20 @@ class UserProfile extends React.Component {
     }
     const image = user._links.find(link => link.rel === 'user.image')
     const image_uri = 'https://etu.utt.fr' + image.uri // TODO replace by config
+
+    const displayUEList = () => {
+      if (!user.uvs || user.uvs.length === 0) return false
+      if (user.uvs.length === 1 && user.uvs[0] === '') return false
+      return true
+    }
+
+    const getUserBranch = user => {
+      let r = user.branch
+      if (user.level) r += ' ' + user.level
+      if (user.speciality) r += ` (${user.speciality})`
+      return r
+    }
+
     return (
       <ScrollView contentContainerStyle={styles.container}>
         <Avatar
@@ -167,12 +176,7 @@ class UserProfile extends React.Component {
         />
         <ProfileElement
           type='Branche'
-          value={
-            user.branch +
-            ' ' +
-            user.level +
-            (user.speciality ? ' ' + user.speciality : '')
-          }
+          value={getUserBranch(user)}
           icon='graduation-cap'
         />
         <ProfileElement
@@ -202,15 +206,17 @@ class UserProfile extends React.Component {
           onPress={() => this.showPhonePopup(user)}
         />
         {this.getAddress(user, thisuser)}
-        <ProfileElement
-          type='Sexe'
-          value={user.sex === 'male' ? 'Homme' : 'Femme'}
-          icon='venus-mars'
-          private={
-            thisuser.studentId === user.studentId &&
-            user.sexPrivacy !== 'public'
-          }
-        />
+        {user.sex !== null && (
+          <ProfileElement
+            type='Sexe'
+            value={user.sex === 'male' ? 'Homme' : 'Femme'}
+            icon='venus-mars'
+            private={
+              thisuser.studentId === user.studentId &&
+              user.sexPrivacy !== 'public'
+            }
+          />
+        )}
         <ProfileElement
           type='Nationalité'
           value={user.nationality}
@@ -222,14 +228,20 @@ class UserProfile extends React.Component {
         />
         <ProfileElement
           type='Date de naissance'
-          value={user.birthday ? moment(user.birthday.date).format('DD/MM/YYYY') : null}
+          value={
+            user.birthday
+              ? moment(user.birthday.date).format('DD/MM/YYYY')
+              : null
+          }
           icon='birthday-cake'
           private={
             thisuser.studentId === user.studentId &&
             user.birthdayPrivacy !== 'public'
           }
         />
-        <ProfileUEList ues={user.uvs} navigation={this.props.navigation} />
+        {displayUEList() && (
+          <ProfileUEList ues={user.uvs} navigation={this.props.navigation} />
+        )}
         {/* TODO
           
           <ProfileElement

@@ -24,8 +24,7 @@ class SearchUE extends React.Component {
     }
   }
 
-  static navigationOptions = ({ screenProps }) =>
-    DefaultTopbar({ navigate: screenProps.goTo }, 'Rechercher une UE')
+  static navigationOptions = () => DefaultTopbar('Rechercher une UE')
   getUEsFromMemory = async () => {
     try {
       const ues = await AsyncStorage.getItem(UES_KEY)
@@ -46,19 +45,25 @@ class SearchUE extends React.Component {
   }
   render() {
     let { ues } = this.state
-    const { navigate } = this.props.navigation
     if (ues.length === 0)
       return (
         <View style={styles.spin}>
           <ActivityIndicator size='large' color='#4098ff' />
         </View>
       )
-    ues = ues.filter(ue => {
-      const fullname = `${ue.slug} ${ue.name}`
-      return (
-        fullname.toUpperCase().indexOf(this.state.search.toUpperCase()) !== -1
-      )
-    })
+    const { navigate } = this.props.navigation
+    ues = ues
+      .filter(ue => {
+        const fullname = `${ue.slug} ${ue.name} ${ue.code}`
+        return (
+          fullname.toUpperCase().indexOf(this.state.search.toUpperCase()) !== -1
+        )
+      })
+      .sort((a, b) => {
+        if (a.code > b.code) return 1
+        if (a.code < b.code) return -1
+        return 0
+      })
     return (
       <View style={styles.container}>
         <InputItem

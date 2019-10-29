@@ -23,7 +23,7 @@ import HTML from 'react-native-render-html'
 class AssosDetails extends React.Component {
   static navigationOptions = ({ navigation }) => {
     const asso = navigation.getParam('asso')
-    return DefaultTopbar(navigation, asso.name, true)
+    return DefaultTopbar(asso.name)
   }
 
   constructor(props) {
@@ -85,7 +85,7 @@ class AssosDetails extends React.Component {
   showPhonePopup = asso => {
     Alert.alert(
       'Voulez vous appeler ou envoyer un message ?',
-      `${asso.name} ${asso.phone}`,
+      `${asso.name} - ${asso.phone}`,
       [
         {
           text: 'Appeler',
@@ -103,7 +103,7 @@ class AssosDetails extends React.Component {
   showMailPopup = (name, mail) => {
     Alert.alert(
       'Voulez vous envoyer un mail à cette association ?',
-      `${name} ${mail}`,
+      `${name} - ${mail}`,
       [
         {
           text: 'Ok',
@@ -133,6 +133,11 @@ class AssosDetails extends React.Component {
       const groupId = member.group.id
       if (!groups.find(group => group.id === groupId)) groups.push(member.group)
     })
+    groups = groups.sort((a, b) => {
+      if (a.position > b.position) return 1
+      if (a.position < b.position) return -1
+      return 0
+    })
     return (
       <View style={styles.container}>
         <ScrollView contentContainerStyle={styles.subcontainer}>
@@ -158,7 +163,7 @@ class AssosDetails extends React.Component {
             type='E-mail'
             value={asso.mail}
             icon='envelope'
-            onPress={() => this.showMailPopup(asso.fullName, asso.mail)}
+            onPress={() => this.showMailPopup(asso.name, asso.mail)}
           />
           <ProfileElement
             type='Site web'
@@ -180,6 +185,11 @@ class AssosDetails extends React.Component {
             <AntList renderHeader={group.name} key={group.id}>
               {members
                 .filter(member => member.group.id === group.id)
+                .sort((a, b) => {
+                  if (a._embed.user.fullName > b._embed.user.fullName) return 1
+                  if (a._embed.user.fullName < b._embed.user.fullName) return -1
+                  return 0
+                })
                 .map(member => (
                   <AntList.Item
                     arrow='horizontal'

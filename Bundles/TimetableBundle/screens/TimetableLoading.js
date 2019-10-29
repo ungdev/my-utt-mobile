@@ -3,8 +3,8 @@ import { ActivityIndicator, StyleSheet, View } from 'react-native'
 import DefaultTopbar from '../../../constants/DefaultTopbar'
 
 class TimetableLoading extends React.Component {
-  static navigationOptions = ({ navigation }) =>
-    DefaultTopbar(navigation, 'Emploi du temps')
+  static navigationOptions = () =>
+    DefaultTopbar('Emploi du temps')
 
   render() {
     return (

@@ -4,8 +4,8 @@ import DefaultTopbar from '../../../constants/DefaultTopbar'
 import GridButton from '../../../components/Menu/GridButton'
 
 class Assos extends React.Component {
-  static navigationOptions = ({ navigation }) =>
-    DefaultTopbar(navigation, 'Associations')
+  static navigationOptions = () =>
+    DefaultTopbar('Associations')
 
   getOrgaImageLink = orga => {
     if (!orga) return null
