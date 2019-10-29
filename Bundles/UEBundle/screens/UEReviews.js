@@ -2,8 +2,6 @@ import React from 'react'
 import {
   ActivityIndicator,
   Dimensions,
-  TouchableOpacity,
-  Platform,
   ScrollView,
   StyleSheet,
   Text,
@@ -11,6 +9,7 @@ import {
 } from 'react-native'
 import { fetchUEReviews } from '../../../services/api'
 import SemesterReviewDropDown from '../components/SemesterReviewDropDown'
+import DefaultTopbar from '../../../constants/DefaultTopbar'
 
 class UEReviews extends React.Component {
   constructor(props) {
@@ -21,23 +20,8 @@ class UEReviews extends React.Component {
     }
   }
   static navigationOptions = ({ navigation }) => {
-    let title = `${navigation.getParam('code', '...')} - Annales`
-    return {
-      title,
-      headerStyle: {
-        backgroundColor: '#4098ff'
-      },
-      headerTitleStyle: {
-        color: 'white'
-      },
-      headerLeft: Platform.OS === 'ios' && (
-        <TouchableOpacity style={styles.back} onPress={() => navigation.pop()}>
-          <Text style={{ marginLeft: 8, color: 'white', fontSize: 20 }}>
-            Retour
-          </Text>
-        </TouchableOpacity>
-      )
-    }
+    const title = `${navigation.getParam('code', '...')} - Annales`
+    return DefaultTopbar(title)
   }
 
   getReviews = async slug => {

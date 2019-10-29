@@ -7,6 +7,8 @@ import EtuLogin from './login/EtuLoginPage'
 import UE from '../Bundles/UEBundle/Main'
 import UECommentaries from '../Bundles/UEBundle/screens/UECommentaries'
 import UEDetails from '../Bundles/UEBundle/screens/UEDetails'
+import UEReviews from '../Bundles/UEBundle/screens/UEReviews'
+import UEReviewViewer from '../Bundles/UEBundle/screens/UEReviewViewer'
 import Profile from '../Bundles/ProfileBundle/screens/Profile'
 import Events from '../Bundles/EventsBundle/screens/Events'
 import EventsDetails from '../Bundles/EventsBundle/screens/EventsDetails'
@@ -28,7 +30,9 @@ const MainApp = createStackNavigator(
     Timetable,
     UE,
     UECommentaries,
-    UEDetails
+    UEDetails,
+    UEReviews,
+    UEReviewViewer
   },
   {
     navigationOptions: () => DefaultTopbar('My UTT')

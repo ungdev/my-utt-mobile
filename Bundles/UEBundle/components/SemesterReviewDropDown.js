@@ -21,7 +21,7 @@ const translate = type => {
 }
 const openReview = (review, semester, navigation) => {
   const url = 'https://etu.utt.fr' + review._links[0].uri
-  navigation.navigate('Viewer', {
+  navigation.navigate('UEReviewViewer', {
     name: translate(review.type) + ' ' + semester,
     url
   })

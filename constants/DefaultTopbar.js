@@ -1,4 +1,4 @@
-const Topbar = title => {
+const Topbar = (title, button = null) => {
   return {
     title,
     headerStyle: {
@@ -7,7 +7,8 @@ const Topbar = title => {
     headerTintColor: 'white',
     headerTitleStyle: {
       color: 'white'
-    }
+    },
+    headerRight: button
   }
 }
 export default Topbar

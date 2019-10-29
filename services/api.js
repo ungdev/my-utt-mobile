@@ -116,7 +116,6 @@ export const fetchUEReviews = async slug => {
   const res = await api.get(`ues/${slug}/reviews`, {
     headers: { Authorization: `Bearer ${token}` }
   })
-  console.log(res.data)
   return res.data.reviews
 }
 
