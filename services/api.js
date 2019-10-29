@@ -111,6 +111,14 @@ export const fetchUECommentaires = async slug => {
   return res.data.comments
 }
 
+export const fetchUEReviews = async slug => {
+  const token = await getToken()
+  const res = await api.get(`ues/${slug}/reviews`, {
+    headers: { Authorization: `Bearer ${token}` }
+  })
+  return res.data.reviews
+}
+
 export const setExpoPushToken = async pushToken => {
   const token = await getToken()
   const res = await api.post(

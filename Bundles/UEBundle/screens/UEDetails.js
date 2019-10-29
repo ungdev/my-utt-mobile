@@ -110,6 +110,18 @@ class UEDetails extends React.Component {
               Voir les commentaires
             </Button>
           )}
+          {user && user.isStudent && (
+            <Button
+              onPress={() =>
+                navigation.navigate('UEReviews', {
+                  slug: navigation.getParam('slug', '...'),
+                  code: navigation.getParam('code', '...')
+                })
+              }
+            >
+              Voir les annales
+            </Button>
+          )}
           <Text style={{ marginBottom: 40 }} />
         </ScrollView>
       </View>

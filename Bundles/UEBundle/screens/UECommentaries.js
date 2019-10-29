@@ -8,7 +8,6 @@ import {
   Text,
   View
 } from 'react-native'
-import Icon from 'react-native-vector-icons/FontAwesome'
 import { fetchUECommentaires } from '../../../services/api'
 import { Card } from '@ant-design/react-native'
 import HTML from 'react-native-render-html'
