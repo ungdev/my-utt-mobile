@@ -10,6 +10,8 @@ import UEDetails from '../Bundles/UEBundle/screens/UEDetails'
 import UEReviews from '../Bundles/UEBundle/screens/UEReviews'
 import UEReviewViewer from '../Bundles/UEBundle/screens/UEReviewViewer'
 import Profile from '../Bundles/ProfileBundle/screens/Profile'
+import Trombi from '../Bundles/TrombiBundle/screens/Trombi'
+import TrombiResult from '../Bundles/TrombiBundle/screens/TrombiResult'
 import Events from '../Bundles/EventsBundle/screens/Events'
 import EventsDetails from '../Bundles/EventsBundle/screens/EventsDetails'
 import Assos from '../Bundles/AssosBundle/screens/Assos'
@@ -28,6 +30,8 @@ const MainApp = createStackNavigator(
     EventsDetails,
     Profile,
     Timetable,
+    Trombi,
+    TrombiResult,
     UE,
     UECommentaries,
     UEDetails,

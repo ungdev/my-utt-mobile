@@ -2,8 +2,6 @@ import React from 'react'
 import {
   ActivityIndicator,
   Dimensions,
-  TouchableOpacity,
-  Platform,
   ScrollView,
   StyleSheet,
   Text,

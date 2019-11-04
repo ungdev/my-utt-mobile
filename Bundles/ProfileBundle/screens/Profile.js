@@ -21,8 +21,7 @@ class UserProfile extends React.Component {
   static navigationOptions = ({ navigation }) => {
     const user = navigation.getParam('user')
     return DefaultTopbar(
-      user ? user.fullName : 'Mon Profil',
-      user ? true : false
+      user ? user.fullName : 'Mon Profil'
     )
   }
 
@@ -230,7 +229,7 @@ class UserProfile extends React.Component {
           type='Date de naissance'
           value={
             user.birthday
-              ? moment(user.birthday.date).format('DD/MM/YYYY')
+              ? moment(typeof user.birthday === 'string' ? user.birthday : user.birthday.date).format('DD/MM/YYYY')
               : null
           }
           icon='birthday-cake'

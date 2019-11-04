@@ -31,11 +31,7 @@ export const renewAccessToken = async () => {
     let clientSecret = await AsyncStorage.getItem(CLIENT_SECRET_KEY)
     if (!clientId || !clientSecret) return null
     const res = await axios.post(
-      `${
-        config.etu_utt_baseuri
-      }oauth/token?grant_type=client_credentials&scope=${
-        config.etu_utt_scope
-      }&client_id=${clientId}&client_secret=${clientSecret}`
+      `${config.etu_utt_baseuri}oauth/token?grant_type=client_credentials&scope=${config.etu_utt_scope}&client_id=${clientId}&client_secret=${clientSecret}`
     )
 
     await AsyncStorage.setItem(ACCESS_TOKEN_KEY, res.data.access_token)
@@ -54,6 +50,40 @@ export const fetchUser = async () => {
   })
   return res.data.data
 }
+const buildParams = query => {
+  if (!query) throw 'Null Query'
+  const {
+    branch,
+    level,
+    speciality,
+    formation,
+    name,
+    email,
+    studentId,
+    phone
+  } = query
+  let params = ''
+  if (branch) params += '&branch=' + branch
+  if (level) params += '&level=' + level
+  if (speciality) params += '&speciality=' + speciality
+  if (formation) params += '&formation=' + formation
+  if (name) params += '&name=' + name
+  if (email) params += '&mail=' + email
+  if (studentId) params += '&student_id=' + studentId
+  if (phone) params += '&phone=' + phone
+
+  if (params === '') throw 'No params'
+  return params
+}
+
+export const fetchUsers = async (query, page) => {
+  const params = buildParams(query)
+  const token = await getToken()
+  const res = await api.get('public/users?page=' + page + params, {
+    headers: { Authorization: `Bearer ${token}` }
+  })
+  return res.data
+}
 
 export const fetchPublicUser = async login => {
   const token = await getToken()
@@ -68,7 +98,9 @@ export const fetchOrgas = async () => {
   const res = await api.get('public/listorgas?noElu=true', {
     headers: { Authorization: `Bearer ${token}` }
   })
-  return res.data.data.filter(orga => !orga.name.includes('Elus') && !orga.name.includes('Élus'))
+  return res.data.data.filter(
+    orga => !orga.name.includes('Elus') && !orga.name.includes('Élus')
+  )
 }
 
 export const fetchOrga = async login => {
@@ -138,7 +170,7 @@ export const fetchEvents = async (after, before) => {
   })
   return res.data.events
 }
-export const fetchEvent = async (id) => {
+export const fetchEvent = async id => {
   const token = await getToken()
   const res = await api.get(`events/${id}`, {
     headers: { Authorization: `Bearer ${token}` }

@@ -89,6 +89,9 @@ class MainMenu extends React.Component {
       case 'edt':
         this.props.navigation.navigate('Timetable')
         break
+      case 'trombi':
+        this.props.navigation.navigate('Trombi')
+        break
       default:
         break
     }
@@ -224,12 +227,14 @@ class MainMenu extends React.Component {
       {
         name: 'Paramètres',
         icon: 'gear'
-      },
+      },*/
       {
         name: 'Trombinoscopes',
         icon: 'address-book',
-        destination: 'trombi'
-      },*/
+        destination: 'trombi',
+        tutorialTitle: "Tu cherches quelqu'un ?",
+        tutorialContent: 'Tu trouveras peut être cette personne ici.'
+      },
       {
         name: 'Associations',
         icon: 'users',
