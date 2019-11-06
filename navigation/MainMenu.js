@@ -159,6 +159,7 @@ class MainMenu extends React.Component {
       'ue',
       'edt',
       'events',
+      'trombi',
       'orgas',
       'ung',
       'about',

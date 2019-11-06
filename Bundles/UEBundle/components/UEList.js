@@ -39,14 +39,20 @@ const UEList = props => (
         <List.Item
           key={ue.slug}
           thumb={<Image source={image} style={styles.item} />}
-          arrow='horizontal'
-          onPress={() => props.onPress(ue)}
+          arrow={ue.name !== '' ? 'horizontal' : null}
+          onPress={ue.name !== '' ? () => props.onPress(ue) : null}
         >
           <Text>{ue.code}</Text>
           <Text>{ue.name}</Text>
         </List.Item>
       )
     })}
+    {props.ues && props.ues.length === 0 && (
+      <List.Item
+      >
+        <Text>Vous n'avez pas d'UE</Text>
+      </List.Item>
+    )}
   </List>
 )
 

@@ -43,19 +43,20 @@ class MyUEScreen extends React.Component {
         </View>
       )
     const { navigate } = this.props.navigation
-
-    const myues = user.uvs.map(uv => {
-      const found = ues.find(u => u.code === uv)
-      return found
-        ? found
-        : {
-            slug: uv.toLowerCase(),
-            code: uv,
-            name: '',
-            category: 'other',
-            nodetails: true
-          }
-    })
+    const myues = user.uvs
+      .filter(uv => uv !== '')
+      .map(uv => {
+        const found = ues.find(u => u.code === uv)
+        return found
+          ? found
+          : {
+              slug: uv.toLowerCase(),
+              code: uv,
+              name: '',
+              category: 'other',
+              nodetails: true
+            }
+      })
     return (
       <View style={styles.container}>
         <UEList
