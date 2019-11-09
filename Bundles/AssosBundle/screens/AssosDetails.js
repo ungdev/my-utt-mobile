@@ -186,7 +186,6 @@ class AssosDetails extends React.Component {
               {members
                 .filter(member => member.group.id === group.id)
                 .sort((a, b) => {
-                  console.log(a, b)
                   if (a.role > b.role) return 1
                   if (a.role < b.role) return -1
                   return 0

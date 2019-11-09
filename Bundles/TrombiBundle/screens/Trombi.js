@@ -1,5 +1,5 @@
 import React from 'react'
-import { ScrollView, StyleSheet, Text } from 'react-native'
+import { ScrollView, StyleSheet, Text, View } from 'react-native'
 import DefaultTopbar from '../../../constants/DefaultTopbar'
 import Icon from 'react-native-vector-icons/FontAwesome'
 import { InputItem } from '@ant-design/react-native'
@@ -21,7 +21,7 @@ class Trombi extends React.Component {
       email: '',
       studentId: '',
       phone: ''
-      //ue: ''
+      //ue: '' TODO
     }
   }
   search = () => {
@@ -137,8 +137,9 @@ class Trombi extends React.Component {
 
     return (
       <ScrollView contentContainerStyle={styles.container}>
-        <Text style={styles.title}>Rechercher un utilisateur</Text>
-
+        <View style={styles.titleContainer}>
+          <Text style={styles.title}>Rechercher un utilisateur</Text>
+        </View>
         <InputItem
           clear
           value={name}
@@ -191,6 +192,7 @@ class Trombi extends React.Component {
         <RNPickerSelect
           onValueChange={formation => this.setState({ formation })}
           style={pickerSelectStyles}
+          useNativeAndroidPickerStyle={false}
           placeholder={{ label: 'Choisissez un diplôme', value: null }}
           Icon={() => <Icon name='graduation-cap' size={26} />}
           items={formations}
@@ -199,6 +201,7 @@ class Trombi extends React.Component {
         <RNPickerSelect
           onValueChange={branch => this.setState({ branch })}
           style={pickerSelectStyles}
+          useNativeAndroidPickerStyle={false}
           placeholder={{ label: 'Choisissez une branche', value: null }}
           Icon={() => <Icon name='graduation-cap' size={26} />}
           items={branches}
@@ -207,6 +210,7 @@ class Trombi extends React.Component {
         <RNPickerSelect
           onValueChange={level => this.setState({ level })}
           style={pickerSelectStyles}
+          useNativeAndroidPickerStyle={false}
           placeholder={{ label: 'Choisissez un niveau', value: null }}
           Icon={() => <Icon name='graduation-cap' size={26} />}
           items={levels.map(level => ({ label: `${level}`, value: level }))}
@@ -215,6 +219,7 @@ class Trombi extends React.Component {
         <RNPickerSelect
           onValueChange={speciality => this.setState({ speciality })}
           style={pickerSelectStyles}
+          useNativeAndroidPickerStyle={false}
           placeholder={{ label: 'Choisissez une filière', value: null }}
           Icon={() => <Icon name='graduation-cap' size={26} />}
           items={specialities}
@@ -240,7 +245,7 @@ class Trombi extends React.Component {
 
 const styles = StyleSheet.create({
   container: {
-    alignItems: 'center',
+    alignItems: 'flex-start',
     backgroundColor: '#fff',
     paddingTop: 20
   },
@@ -248,12 +253,28 @@ const styles = StyleSheet.create({
     fontSize: 25,
     marginBottom: 20
   },
+  titleContainer: {
+    alignSelf: 'stretch',
+    alignItems: 'center'
+  },
   input: {
     flex: 1
   }
 })
 const pickerSelectStyles = StyleSheet.create({
   inputIOS: {
+    fontSize: 16,
+    paddingVertical: 12,
+    paddingHorizontal: 80,
+    borderWidth: 1,
+    borderTopWidth: 0,
+    borderColor: '#eee',
+    borderRadius: 4,
+    color: 'black',
+    paddingRight: 30 // to ensure the text is never behind the icon
+  },
+  inputAndroid: {
+    alignSelf: 'stretch',
     fontSize: 16,
     paddingVertical: 12,
     paddingHorizontal: 80,
