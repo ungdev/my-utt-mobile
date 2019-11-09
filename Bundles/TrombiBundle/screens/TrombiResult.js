@@ -14,7 +14,7 @@ import Icon from 'react-native-vector-icons/FontAwesome'
 
 class TrombiResult extends React.Component {
   static navigationOptions = () => {
-    return DefaultTopbar('Résultat de la recherche')
+    return DefaultTopbar('Résultats de la recherche')
   }
   constructor(props) {
     super(props)
@@ -30,7 +30,8 @@ class TrombiResult extends React.Component {
   getUserSubtitle = user => {
     let subtitle = ''
     if (user.branch) {
-      subtitle += user.branch + user.level
+      subtitle += user.branch
+      if (user.level) subtitle += user.level
       if (user.speciality) subtitle += ' ' + user.speciality
       if (user.formation) subtitle += ' (' + user.formation + ')'
     }
@@ -77,13 +78,17 @@ class TrombiResult extends React.Component {
     return (
       <View style={styles.container}>
         <View style={styles.top}>
-          {totalItems > 0 ? <Text style={styles.title}>
-            {totalItems} résultats,{' '}
-            {currentPage === totalPages
-              ? totalItems - perPage * (totalPages - 1)
-              : perPage}{' '}
-            sur cette page
-          </Text> : <Text style={styles.title}>Aucun résultats</Text>}
+          {totalItems > 0 ? (
+            <Text style={styles.title}>
+              {totalItems} résultats,{' '}
+              {currentPage === totalPages
+                ? totalItems - perPage * (totalPages - 1)
+                : perPage}{' '}
+              sur cette page
+            </Text>
+          ) : (
+            <Text style={styles.title}>Aucun résultat</Text>
+          )}
         </View>
         <ScrollView contentContainerStyle={styles.scroll}>
           {users.map(user => (

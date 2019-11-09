@@ -9,7 +9,7 @@ const GridButton = props => (
 )
 const styles = StyleSheet.create({
   container: {
-    height: 30,
+    height: 40,
     backgroundColor: '#fff',
     alignItems: 'center',
     flexDirection: 'row',
@@ -20,7 +20,7 @@ const styles = StyleSheet.create({
     margin: 5
   },
   text: {
-    fontSize: normalize(10),
+    fontSize: 15,
     color: '#2f54eb'
   }
 })

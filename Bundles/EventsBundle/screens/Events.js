@@ -1,5 +1,5 @@
 import React from 'react'
-import { AsyncStorage, ScrollView, StyleSheet, Text, View } from 'react-native'
+import { AsyncStorage, ScrollView, StyleSheet } from 'react-native'
 import DefaultTopbar from '../../../constants/DefaultTopbar'
 import { Calendar } from 'react-native-calendars'
 import moment from 'moment'
@@ -7,6 +7,7 @@ import { LocaleConfig } from 'react-native-calendars'
 import { EVENTS_KEY } from '../../../constants/StorageKey'
 import { fetchEvents } from '../../../services/api'
 import EventLine from '../components/EventLine'
+import GestureRecognizer from 'react-native-swipe-gestures'
 
 LocaleConfig.locales['fr'] = {
   monthNames: [
@@ -52,8 +53,7 @@ LocaleConfig.locales['fr'] = {
 LocaleConfig.defaultLocale = 'fr'
 
 class Events extends React.Component {
-  static navigationOptions = () =>
-    DefaultTopbar('Événements')
+  static navigationOptions = () => DefaultTopbar('Événements')
 
   constructor(props) {
     super(props)
@@ -151,8 +151,29 @@ class Events extends React.Component {
         dayEvents.push('empty')
       }
     }
+    const config = {
+      velocityThreshold: 0.3,
+      directionalOffsetThreshold: 80
+    }
     return (
-      <View style={{ flex: 1 }}>
+      <GestureRecognizer
+        onSwipeLeft={() => {
+          const newDate = moment(current, 'YYYY-MM-DD')
+            .add(1, 'month')
+            .format('YYYY-MM-DD')
+          this.setState({ current: newDate })
+        }}
+        onSwipeRight={() => {
+          const newDate = moment(current, 'YYYY-MM-DD')
+            .subtract(1, 'month')
+            .format('YYYY-MM-DD')
+          this.setState({ current: newDate })
+        }}
+        config={config}
+        style={{
+          flex: 1
+        }}
+      >
         <Calendar
           current={current}
           onDayPress={day => {
@@ -204,7 +225,7 @@ class Events extends React.Component {
             </React.Fragment>
           )}
         </ScrollView>
-      </View>
+      </GestureRecognizer>
     )
   }
 }

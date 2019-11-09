@@ -237,7 +237,9 @@ class Trombi extends React.Component {
         >
           <Icon name='book' size={26} />
         </InputItem>*/}
-        <Button onPress={this.search} title='Rechercher' />
+        <View style={styles.buttonContainer}>
+          <Button onPress={this.search} title='Rechercher' />
+        </View>
       </ScrollView>
     )
   }
@@ -254,6 +256,10 @@ const styles = StyleSheet.create({
     marginBottom: 20
   },
   titleContainer: {
+    alignSelf: 'stretch',
+    alignItems: 'center'
+  },
+  buttonContainer: {
     alignSelf: 'stretch',
     alignItems: 'center'
   },

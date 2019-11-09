@@ -256,7 +256,6 @@ class UserProfile extends React.Component {
 
 const styles = StyleSheet.create({
   container: {
-    flexGrow: 1,
     alignItems: 'center',
     backgroundColor: '#fff',
     paddingTop: 20
