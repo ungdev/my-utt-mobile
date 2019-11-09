@@ -3,7 +3,9 @@ import { Text, View } from 'react-native'
 const CELL_SIZE = 30
 const ScheduleHalfItem = props => {
   const courseA = props.courses.a
+  console.log('courseA:', courseA)
   const courseB = props.courses.b
+  console.log('courseB:', courseB)
   return (
     <View style={{ flex: 1, flexDirection: 'row' }}>
       <View
@@ -35,7 +37,7 @@ const ScheduleHalfItem = props => {
           {courseA.room} - {courseA.type}
         </Text>
       </View>
-      {courseB !== null && (
+      {courseB !== null && courseB !== undefined && (
         <View
           style={{
             flex: 2,
