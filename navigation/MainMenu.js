@@ -195,7 +195,7 @@ class MainMenu extends React.Component {
         destination: 'profile',
         tutorialTitle: 'Tu retrouveras ici ton profil !',
         tutorialContent:
-          'Toutes tes informations y seront, tel que tu les auras rentrées sur le site étudiant'
+          'Toutes tes informations y seront, telles que tu les auras rentrées sur le site étudiant'
       },
       {
         name: 'Guide des UEs',
