@@ -8,7 +8,7 @@ import {
   Dimensions,
   Text
 } from 'react-native'
-import GridButton from '../components/Menu/GridButton'
+import GridButton from '../components/GridButton'
 import { ScrollView } from 'react-native-gesture-handler'
 import Icon from 'react-native-vector-icons/FontAwesome'
 import {

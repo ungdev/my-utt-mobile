@@ -1,6 +1,6 @@
 import React from 'react'
 import { TouchableOpacity, Text, StyleSheet, Dimensions } from 'react-native'
-import { normalize } from '../../services/font'
+import { normalize } from '../services/font'
 import Popover from 'react-native-popover-view'
 
 class GridButton extends React.Component {

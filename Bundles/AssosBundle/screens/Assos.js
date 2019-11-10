@@ -1,7 +1,7 @@
 import React from 'react'
 import { Dimensions, Image, StyleSheet, ScrollView, View } from 'react-native'
 import DefaultTopbar from '../../../constants/DefaultTopbar'
-import GridButton from '../../../components/Menu/GridButton'
+import GridButton from '../../../components/GridButton'
 import config from '../../../config'
 
 class Assos extends React.Component {
