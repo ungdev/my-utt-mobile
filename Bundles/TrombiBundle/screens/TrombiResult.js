@@ -9,8 +9,9 @@ import {
 } from 'react-native'
 import { ListItem } from 'react-native-elements'
 import DefaultTopbar from '../../../constants/DefaultTopbar'
-import { fetchUsers } from '../../../services/api'
+import { fetchUsers } from '../../../api/user'
 import Icon from 'react-native-vector-icons/FontAwesome'
+import config from '../../../config'
 
 class TrombiResult extends React.Component {
   static navigationOptions = () => {
@@ -95,7 +96,7 @@ class TrombiResult extends React.Component {
             <ListItem
               key={user.login}
               leftAvatar={{
-                source: { uri: 'https://etu.utt.fr' + user._links[2].uri }
+                source: { uri: config.etu_utt_baseuri + user._links[2].uri }
               }}
               title={`${user.fullName}${
                 user.surname ? ' (' + user.surname + ')' : ''

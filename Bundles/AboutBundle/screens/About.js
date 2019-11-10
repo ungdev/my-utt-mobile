@@ -1,6 +1,7 @@
 import React from 'react'
 import { Linking, ScrollView, StyleSheet, Text } from 'react-native'
 import DefaultTopbar from '../../../constants/DefaultTopbar'
+import config from '../../../config'
 
 class About extends React.Component {
   static navigationOptions = () => DefaultTopbar('À propos')
@@ -40,9 +41,9 @@ class About extends React.Component {
           site étudiant (
           <Text
             style={styles.link}
-            onPress={() => Linking.openURL('https://etu.utt.fr/bugs')}
+            onPress={() => Linking.openURL(config.etu_utt_baseuri + '/bugs')}
           >
-            https://etu.utt.fr/bugs
+            {config.etu_utt_baseuri}/bugs
           </Text>
           ), ou en nous envoyant un mail à{' '}
           <Text

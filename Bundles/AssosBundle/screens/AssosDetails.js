@@ -11,11 +11,12 @@ import {
   View
 } from 'react-native'
 import { Divider } from 'react-native-elements'
+import config from '../../../config'
 import DefaultTopbar from '../../../constants/DefaultTopbar'
 import { List } from 'react-native-paper'
 import { List as AntList } from '@ant-design/react-native'
 import { normalize } from '../../../services/font'
-import { fetchOrga } from '../../../services/api'
+import { fetchOrga } from '../../../api/orga'
 import ProfileElement from '../../ProfileBundle/components/ProfileElement'
 import { WebBrowser } from 'expo'
 import HTML from 'react-native-render-html'
@@ -77,7 +78,7 @@ class AssosDetails extends React.Component {
   getOrgaImageLink = orga => {
     if (!orga) return null
     return (
-      'https://etu.utt.fr' +
+      config.etu_utt_baseuri +
       orga._links.find(link => link.rel === 'orga.image').uri
     )
   }

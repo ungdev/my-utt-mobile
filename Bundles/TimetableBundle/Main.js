@@ -2,7 +2,7 @@ import React from 'react'
 import { TabView, TabBar } from 'react-native-tab-view'
 import { AsyncStorage, Dimensions, Text } from 'react-native'
 
-import { fetchCourses } from '../../services/api'
+import { fetchCourses } from '../../api/course'
 import { COURSES_KEY } from '../../constants/StorageKey'
 import Timetable from './screens/Timetable'
 import TimetableLoading from './screens/TimetableLoading'

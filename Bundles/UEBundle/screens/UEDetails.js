@@ -8,7 +8,7 @@ import {
   View
 } from 'react-native'
 import { Button } from '@ant-design/react-native'
-import { fetchUEDetails } from '../../../services/api'
+import { fetchUEDetails } from '../../../api/ue'
 import { normalize } from '../../../services/font'
 import Tag from '../../../components/Tag'
 import DefaultTopbar from '../../../constants/DefaultTopbar'

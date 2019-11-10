@@ -1,14 +1,12 @@
 import React from 'react'
 import {
   ActivityIndicator,
-  TouchableOpacity,
-  Platform,
   ScrollView,
   StyleSheet,
   Text,
   View
 } from 'react-native'
-import { fetchUECommentaires } from '../../../services/api'
+import { fetchUECommentaires } from '../../../api/ue'
 import { Card } from '@ant-design/react-native'
 import HTML from 'react-native-render-html'
 import moment from 'moment'

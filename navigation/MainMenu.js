@@ -20,7 +20,9 @@ import {
   USER_KEY,
   ORGAS_KEY
 } from '../constants/StorageKey'
-import { fetchUser, fetchOrgas, getToken } from '../services/api'
+import { getToken } from '../services/api'
+import { fetchOrgas } from '../api/orga'
+import { fetchUser } from '../api/user'
 import { registerForExpoPushNotifications } from '../services/expoPushNotifications'
 import { createStackNavigator } from 'react-navigation'
 import Popover from 'react-native-popover-view'
@@ -181,7 +183,7 @@ class MainMenu extends React.Component {
   render() {
     const { user, orgas } = this.props.screenProps
     if (!user || !orgas) {
-      return (
+      return ( // TODO replace with global loading page
         <View style={styles.spin}>
           <ActivityIndicator size='large' color='#4098ff' />
         </View>

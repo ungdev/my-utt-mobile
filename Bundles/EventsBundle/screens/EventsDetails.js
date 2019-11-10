@@ -10,9 +10,10 @@ import {
 } from 'react-native'
 import DefaultTopbar from '../../../constants/DefaultTopbar'
 import { normalize } from '../../../services/font'
-import { fetchEvent } from '../../../services/api'
+import { fetchEvent } from '../../../api/event'
 import moment from 'moment'
 import HTML from 'react-native-render-html'
+import config from '../../../config'
 
 class EventsDetails extends React.Component {
   static navigationOptions = () => DefaultTopbar('Événement')
@@ -41,7 +42,7 @@ class EventsDetails extends React.Component {
     const orga = orgas.find(orga => orga.login === o)
     if (!o) return null
     return (
-      'https://etu.utt.fr' +
+      config.etu_utt_baseuri +
       orga._links.find(link => link.rel === 'orga.image').uri
     )
   }

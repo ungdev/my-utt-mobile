@@ -1,6 +1,7 @@
 import React from 'react'
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import { List } from 'react-native-paper'
+import config from '../../../config'
 const translate = type => {
   switch (type) {
     case 'final':
@@ -20,7 +21,7 @@ const translate = type => {
   }
 }
 const openReview = (review, semester, navigation) => {
-  const url = 'https://etu.utt.fr' + review._links[0].uri
+  const url = config.etu_utt_baseuri + review._links[0].uri
   navigation.navigate('UEReviewViewer', {
     name: translate(review.type) + ' ' + semester,
     url

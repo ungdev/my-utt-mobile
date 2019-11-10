@@ -2,17 +2,18 @@ import React from 'react'
 import { Dimensions, Image, StyleSheet, ScrollView, View } from 'react-native'
 import DefaultTopbar from '../../../constants/DefaultTopbar'
 import GridButton from '../../../components/Menu/GridButton'
+import config from '../../../config'
 
 class Assos extends React.Component {
-  static navigationOptions = () =>
-    DefaultTopbar('Associations')
+  static navigationOptions = () => DefaultTopbar('Associations')
 
   getOrgaImageLink = orga => {
     if (!orga) return null
-    return (
-      'https://etu.utt.fr' +
+    const url =
+      config.etu_utt_baseuri +
       orga._links.find(link => link.rel === 'orga.image').uri
-    )
+      console.log('url:', url)
+      return url
   }
   click = asso => {
     this.props.navigation.navigate('AssosDetails', { asso })

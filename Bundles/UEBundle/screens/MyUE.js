@@ -1,6 +1,6 @@
 import React from 'react'
 import { View, StyleSheet, AsyncStorage, ActivityIndicator } from 'react-native'
-import { fetchUEs } from '../../../services/api'
+import { fetchUEs } from '../../../api/ue'
 import { UES_KEY } from '../../../constants/StorageKey'
 import DefaultTopbar from '../../../constants/DefaultTopbar'
 import UEList from '../components/UEList'

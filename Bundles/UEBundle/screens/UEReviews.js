@@ -7,7 +7,7 @@ import {
   Text,
   View
 } from 'react-native'
-import { fetchUEReviews } from '../../../services/api'
+import { fetchUEReviews } from '../../../api/ue'
 import SemesterReviewDropDown from '../components/SemesterReviewDropDown'
 import DefaultTopbar from '../../../constants/DefaultTopbar'
 

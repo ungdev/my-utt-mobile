@@ -8,7 +8,7 @@ import {
 } from 'react-native'
 import Icon from 'react-native-vector-icons/FontAwesome'
 import { InputItem } from '@ant-design/react-native'
-import { fetchUEs } from '../../../services/api'
+import { fetchUEs } from '../../../api/ue'
 import { UES_KEY } from '../../../constants/StorageKey'
 import DefaultTopbar from '../../../constants/DefaultTopbar'
 import UEList from '../components/UEList'

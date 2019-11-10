@@ -5,9 +5,10 @@ import { Calendar } from 'react-native-calendars'
 import moment from 'moment'
 import { LocaleConfig } from 'react-native-calendars'
 import { EVENTS_KEY } from '../../../constants/StorageKey'
-import { fetchEvents } from '../../../services/api'
+import { fetchEvents } from '../../../api/event'
 import EventLine from '../components/EventLine'
 import GestureRecognizer from 'react-native-swipe-gestures'
+import config from '../../../config'
 
 LocaleConfig.locales['fr'] = {
   monthNames: [
@@ -114,7 +115,7 @@ class Events extends React.Component {
   getOrgaImageLink = orga => {
     if (!orga) return null
     return (
-      'https://etu.utt.fr' +
+      config.etu_utt_baseuri +
       orga._links.find(link => link.rel === 'orga.image').uri
     )
   }

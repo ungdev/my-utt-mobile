@@ -15,7 +15,8 @@ import ProfileElement from '../components/ProfileElement'
 import SocialButton from '../components/SocialButton'
 import moment from 'moment'
 import ProfileUEList from '../components/ProfileUEList'
-import { fetchPublicUser } from '../../../services/api'
+import { fetchPublicUser } from '../../../api/user'
+import config from '../../../config'
 
 class UserProfile extends React.Component {
   static navigationOptions = ({ navigation }) => {
@@ -130,7 +131,7 @@ class UserProfile extends React.Component {
       )
     }
     const image = user._links.find(link => link.rel === 'user.image')
-    const image_uri = 'https://etu.utt.fr' + image.uri // TODO replace by config
+    const image_uri = config.etu_utt_baseuri + image.uri
 
     const displayUEList = () => {
       if (!user.uvs || user.uvs.length === 0) return false

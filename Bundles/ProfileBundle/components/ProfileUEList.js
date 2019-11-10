@@ -6,7 +6,7 @@ import {
   TouchableOpacity,
   AsyncStorage
 } from 'react-native'
-import { fetchUEs } from '../../../services/api'
+import { fetchUEs } from '../../../api/ue'
 import { UES_KEY } from '../../../constants/StorageKey'
 import Tag from '../../../components/Tag'
 import Icon from 'react-native-vector-icons/FontAwesome'

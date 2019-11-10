@@ -8,7 +8,7 @@ import Icon from 'react-native-vector-icons/FontAwesome'
 class EtuLoginPage extends React.Component {
   constructor(props) {
     super(props)
-    this.uri = `${config.etu_utt_baseuri}oauth/client-create?name=${config.etu_utt_app_name}&device=${Constants.deviceName}&device_uid=${Constants.deviceId}&scope=${config.etu_utt_scope}`
+    this.uri = `${config.etu_utt_baseuri}/api/oauth/client-create?name=${config.etu_utt_app_name}&device=${Constants.deviceName}&device_uid=${Constants.deviceId}&scope=${config.etu_utt_scope}`
     this.state = {
       uri: this.uri
     }
@@ -64,7 +64,7 @@ class EtuLoginPage extends React.Component {
               if (e.nativeEvent.url.indexOf('http://etu.utt.fr/') !== -1) {
                 this.setState({ uri: this.uri })
               }
-              if (e.nativeEvent.url.indexOf('https://etu.utt.fr/redirect') !== -1) {
+              if (e.nativeEvent.url.indexOf(`${config.etu_utt_baseuri}/api/redirect`) !== -1) {
                 if (
                   e.nativeEvent.url.indexOf('authentification_canceled') === -1
                 ) {
