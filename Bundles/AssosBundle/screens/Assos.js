@@ -12,7 +12,6 @@ class Assos extends React.Component {
     const url =
       config.etu_utt_baseuri +
       orga._links.find(link => link.rel === 'orga.image').uri
-      console.log('url:', url)
       return url
   }
   click = asso => {
