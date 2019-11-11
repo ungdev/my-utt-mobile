@@ -16,14 +16,13 @@ import SocialButton from '../components/SocialButton'
 import moment from 'moment'
 import ProfileUEList from '../components/ProfileUEList'
 import { fetchPublicUser } from '../../../api/user'
+import Button from '../../../components/Button'
 import config from '../../../config'
 
 class UserProfile extends React.Component {
   static navigationOptions = ({ navigation }) => {
     const user = navigation.getParam('user')
-    return DefaultTopbar(
-      user ? user.fullName : 'Mon Profil'
-    )
+    return DefaultTopbar(user ? user.fullName : 'Mon Profil')
   }
 
   constructor(props) {
@@ -168,6 +167,16 @@ class UserProfile extends React.Component {
           <SocialButton type='twitter' link={user.twitter} />
           <SocialButton type='website' link={user.website} />
         </View>
+        {user.studentId !== thisuser.studentId && (
+          <View style={styles.buttonContainer}>
+            <Button
+              onPress={() =>
+                this.props.navigation.navigate('Timetable', { user })
+              }
+              title="Voir l'emploi du temps"
+            />
+          </View>
+        )}
         <Divider style={{ width: '90%' }} />
         <ProfileElement
           type='Numéro étudiant'
@@ -230,7 +239,11 @@ class UserProfile extends React.Component {
           type='Date de naissance'
           value={
             user.birthday
-              ? moment(typeof user.birthday === 'string' ? user.birthday : user.birthday.date).format('DD/MM/YYYY')
+              ? moment(
+                  typeof user.birthday === 'string'
+                    ? user.birthday
+                    : user.birthday.date
+                ).format('DD/MM/YYYY')
               : null
           }
           icon='birthday-cake'

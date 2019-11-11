@@ -6,17 +6,16 @@ import ScheduleItems from '../components/ScheduleItems'
 import { TouchableHighlight } from 'react-native-gesture-handler'
 
 class Timetable extends React.Component {
-  static navigationOptions = () =>
-    DefaultTopbar('Emploi du temps')
+  static navigationOptions = () => DefaultTopbar('Emploi du temps')
 
   render() {
-    const { user } = this.props.screenProps
+    const { user } = this.props
     return (
       <View style={styles.container}>
         <ScrollView style={styles.subcontainer}>
           <TouchableHighlight
             onPress={() =>
-              this.props.screenProps.goTo('Profile', {
+              this.props.navigation.navigate('Profile', {
                 user
               })
             }
@@ -30,7 +29,9 @@ class Timetable extends React.Component {
               )}
               {user.branch !== null && (
                 <Text style={styles.branch}>
-                  {user.branch} {user.speciality ? '- ' + user.speciality : ''}
+                  {user.branch}
+                  {user.level ? user.level : ''}{' '}
+                  {user.speciality ? '- ' + user.speciality : ''}
                 </Text>
               )}
             </View>

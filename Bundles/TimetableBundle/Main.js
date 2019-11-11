@@ -8,13 +8,17 @@ import Timetable from './screens/Timetable'
 import TimetableLoading from './screens/TimetableLoading'
 import DefaultTopbar from '../../constants/DefaultTopbar'
 
-
 class TimetableBundle extends React.Component {
   static navigationOptions = () => DefaultTopbar('Emploi du temps')
   constructor(props) {
     super(props)
-    this.getCoursesFromServer()
-    this.getCoursesFromMemory()
+    const user = props.navigation.getParam('user')
+    if (!user) {
+      this.getCoursesFromServer(this.props.screenProps.user, true)
+      this.getCoursesFromMemory()
+    } else {
+      this.getCoursesFromServer(user)
+    }
     this.state = {
       index: 0,
       routes: [
@@ -37,16 +41,22 @@ class TimetableBundle extends React.Component {
       console.log(e)
     }
   }
-  getCoursesFromServer = async () => {
+  getCoursesFromServer = async (user, addToStorage = false) => {
     try {
-      const courses = await fetchCourses(this.props.screenProps.user.login)
+      const courses = await fetchCourses(user.login)
       this.setState({ courses })
-      await AsyncStorage.setItem(COURSES_KEY, JSON.stringify(courses))
+      if (addToStorage) {
+        await AsyncStorage.setItem(COURSES_KEY, JSON.stringify(courses))
+      }
     } catch (e) {
       console.log(e)
     }
   }
   render() {
+    let user = this.props.navigation.getParam('user')
+    if (!user) {
+      user = this.props.screenProps.user
+    }
     const { courses } = this.state
     if (courses === null)
       // TODO add fetching because if user has no course it would spin forever
@@ -64,6 +74,7 @@ class TimetableBundle extends React.Component {
               courses: courses.filter(course => course.day === route.key)
             }}
             navigation={this.props.navigation}
+            user={user}
           />
         )}
         renderTabBar={props => (
@@ -72,7 +83,7 @@ class TimetableBundle extends React.Component {
             indicatorStyle={{ backgroundColor: '#4098ff' }}
             style={{ backgroundColor: 'white' }}
             tabStyle={{ padding: 0 }}
-            renderLabel={({ route, focused, color }) => (
+            renderLabel={({ route, focused }) => (
               <Text
                 style={{
                   color: focused ? '#4098ff' : '#ccc',
